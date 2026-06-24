@@ -85,12 +85,12 @@ const features = [
     color: "purple",
   },
   {
-    id: "interval",
+    id: "buble",
     market: "WALLSTREET",
-    title: "Interval Map",
-    subtitle: "Hacim profili · Zaman analizi",
+    title: "Buble Map",
+    subtitle: "Likidite balonları · Akış yoğunluğu",
     description:
-      "Fiyat hareketi üzerine bindirilmiş hacim ve zaman profilleri. Kurumsal ayak izlerini saniye saniye takip edin.",
+      "Opsiyon piyasasındaki likidite balonlarını ve akış yoğunluğunu büyüklük + renk skalasıyla haritalayan yeni nesil görselleştirme. Kurumsal ayak izlerini büyüklüğüyle birlikte tek bakışta okuyun.",
     icon: BarChart2,
     color: "amber",
   },

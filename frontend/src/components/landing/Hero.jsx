@@ -104,7 +104,7 @@ export default function Hero() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
-            href="https://www.youtube.com/@NFinans"
+            href="https://www.youtube.com/playlist?list=PL6r4M5EOm1fN-f4hF9CGoPa0aGnFLtQWZ"
             target="_blank"
             rel="noopener noreferrer"
             data-testid="hero-cta-tutorials"

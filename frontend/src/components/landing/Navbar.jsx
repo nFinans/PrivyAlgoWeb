@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Terminal, Menu, X, ChevronDown } from "lucide-react";
 
 const links = [
-  { label: "Canlı Piyasalar", href: "#markets" },
-  { label: "Modüller", href: "#features" },
-  { label: "Altyapı", href: "#technology" },
-  { label: "Paketler", href: "#pricing" },
-  { label: "Topluluk", href: "#community" },
+  { label: "Canlı Piyasalar", href: "#markets", external: false },
+  { label: "Modüller", href: "#features", external: false },
+  { label: "Altyapı", href: "#technology", external: false },
+  { label: "Paketler", href: "#pricing", external: false },
+  { label: "Topluluk", href: "#community", external: false },
+  { label: "Blog", href: "https://www.nfinans.net", external: true },
 ];
 
 export default function Navbar() {
@@ -59,7 +60,9 @@ export default function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                data-testid={`navbar-link-${l.href.replace("#", "")}`}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "noopener noreferrer" : undefined}
+                data-testid={`navbar-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
                 className="font-mono text-[12px] uppercase tracking-[0.15em] text-zinc-400 hover:text-amber-400 transition-colors"
               >
                 {l.label}
@@ -146,6 +149,8 @@ export default function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "noopener noreferrer" : undefined}
                 onClick={() => setOpen(false)}
                 className="font-mono text-sm text-zinc-300 hover:text-amber-400"
               >
