@@ -25,35 +25,15 @@ export default function Navbar() {
           <a
             href="/"
             data-testid="navbar-logo"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3 group shrink-0"
           >
-            <div
-              className="relative h-10 w-10 rounded-md flex items-center justify-center overflow-hidden"
-              style={{
-                background: "#000",
-                border: "1px solid rgba(245,158,11,0.40)",
-                boxShadow:
-                  "0 0 30px rgba(245,158,11,0.25), inset 0 0 12px rgba(38,166,154,0.18)",
-              }}
-            >
-              <img
-                src="/logo.png"
-                alt="PrivyAlgo · Predictive Complex Data Analytics"
-                className="h-full w-full object-cover"
-                loading="eager"
-              />
-            </div>
-            <div className="font-mono leading-tight">
-              <div className="text-[15px] font-bold tracking-tight text-white">
-                PrivyAlgo
-              </div>
-              <div className="text-[9.5px] uppercase tracking-[0.2em] mt-0.5">
-                <span className="text-teal-400">BIST</span>
-                <span className="text-zinc-600 mx-1">+</span>
-                <span className="text-amber-400">WALLSTREET</span>
-                <span className="text-zinc-600 ml-2">Hybrid</span>
-              </div>
-            </div>
+            <img
+              src="/logo-horizontal.png"
+              alt="PrivyAlgo · Predictive Complex Data Analytics · BIST + WallStreet"
+              className="h-10 md:h-11 w-auto object-contain"
+              style={{ filter: "drop-shadow(0 0 12px rgba(245,158,11,0.25))" }}
+              loading="eager"
+            />
           </a>
 
           {/* Desktop links */}
@@ -83,7 +63,7 @@ export default function Navbar() {
               data-testid="navbar-cta"
               className="font-mono text-[13px] font-semibold px-4 py-2 rounded-md bg-amber-500 text-black hover:bg-amber-400 transition-colors inline-flex items-center gap-1.5"
             >
-              Sisteme Eriş
+              Terminallere Eriş
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
             {dropOpen && (
@@ -93,7 +73,7 @@ export default function Navbar() {
                 onMouseLeave={() => setDropOpen(false)}
               >
                 <a
-                  href="https://bist.privyalgo.com/app"
+                  href="https://bist.privyalgo.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid="navbar-login-bist"
@@ -110,7 +90,7 @@ export default function Navbar() {
                   </div>
                 </a>
                 <a
-                  href="https://wallstreet.privyalgo.com/app"
+                  href="https://wallstreet.privyalgo.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid="navbar-login-ws"
@@ -160,7 +140,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://bist.privyalgo.com/app"
+              href="https://bist.privyalgo.com/"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
@@ -169,7 +149,7 @@ export default function Navbar() {
               BIST Terminal
             </a>
             <a
-              href="https://wallstreet.privyalgo.com/app"
+              href="https://wallstreet.privyalgo.com/"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}

@@ -65,11 +65,13 @@ export default function Hero() {
           data-testid="hero-subheadline"
           className="fade-up delay-2 mt-7 max-w-3xl mx-auto text-center text-zinc-400 text-base md:text-lg leading-relaxed"
         >
-          <span className="text-teal-300">BIST hisseleri</span> için kuantitatif{" "}
-          <span className="text-white">TF AL / TF SAT</span> sinyalleri ve Hedge Wall;
-          <span className="text-amber-300"> Wall Street opsiyon piyasası</span> için
-          gerçek zamanlı <span className="text-purple-300">GEX, VEX, 0DTE</span> ve volatilite mekanikleri.
-          Profesyonel trader&apos;ın iki piyasayı tek ekranda okuduğu hibrit terminal.
+          <span className="text-teal-300">BIST hisseleri</span> için{" "}
+          <span className="text-white">&ldquo;şimdi al / şimdi sat&rdquo;</span>{" "}
+          akıllı sinyaller; <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          <span className="text-purple-300">büyük yatırımcıların gizli oyunlarını</span>{" "}
+          gösteren canlı haritalar. Borsayı{" "}
+          <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
+          akan gerçek verilerle okumak için tek ekran.
         </p>
 
         {/* CTAs */}
@@ -78,7 +80,7 @@ export default function Hero() {
           className="fade-up delay-3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="https://bist.privyalgo.com/app"
+            href="https://bist.privyalgo.com/"
             target="_blank"
             rel="noopener noreferrer"
             data-testid="hero-cta-bist"
@@ -93,7 +95,7 @@ export default function Hero() {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
           <a
-            href="https://wallstreet.privyalgo.com/app"
+            href="https://wallstreet.privyalgo.com/"
             target="_blank"
             rel="noopener noreferrer"
             data-testid="hero-cta-ws"
