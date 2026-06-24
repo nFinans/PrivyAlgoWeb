@@ -24,7 +24,7 @@ const BIST_PLANS = [
       "Hedge Wall & MaxBuy/Sell seviyeleri",
       "Sentiment Score & Algoritmanın Kralları",
       "Özel Haftalık Bülten",
-      { t: "Premium Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
     ],
   },
   {
@@ -49,7 +49,7 @@ const BIST_PLANS = [
       "Sentiment Score & Algoritmanın Kralları",
       "Özel Haftalık Bülten",
       { t: "1 Yıllık TradingView PremiumAlgo Paketi", trend: true },
-      { t: "Premium+ Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
     ],
   },
 ];
@@ -76,6 +76,7 @@ const WS_PLANS = [
       "Opra · Alpaca · Deribit canlı akışlar",
       "Sıfır gecikmeli WebSocket altyapısı",
       "nFinans topluluk erişimi",
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
     ],
   },
   {
@@ -100,6 +101,62 @@ const WS_PLANS = [
       "Opra · Alpaca · Deribit canlı akışlar",
       "Sıfır gecikmeli WebSocket altyapısı",
       "nFinans topluluk erişimi",
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      "Öncelikli destek & erken erişim",
+    ],
+  },
+];
+
+const HYBRID_PLANS = [
+  {
+    id: "hybrid-6m",
+    market: "HYBRID",
+    planId: "plan_rkyZmqPnxJXEy",
+    url: "https://whop.com/checkout/plan_rkyZmqPnxJXEy/?d2c=true",
+    name: "HYBRID · 6 Aylık",
+    tagline: "BIST + WallStreet · Tek paket",
+    price: "14.500",
+    currency: "TL",
+    period: "6 ay",
+    note: "KDV Dahil",
+    featured: false,
+    badge: "%18 Tasarruf",
+    cta: "HYBRID 6 Aylık Satın Al",
+    features: [
+      "BIST Terminal — TF AL/SAT, Hedge Wall, Sentiment",
+      "WallStreet Terminal — Opus Wall, Net GEX, Vanna",
+      "5-15-60-120 dk. tam BIST veri seti",
+      "0DTE Map · Greeks Heatmap · Interval Map",
+      "Opra · Alpaca · Deribit · MS SQL canlı akışlar",
+      "Özel Haftalık BIST + WS Bülteni",
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Opsiyon 101 Eğitim Paketi (Ücretsiz)", sparkle: true },
+    ],
+  },
+  {
+    id: "hybrid-yearly",
+    market: "HYBRID",
+    planId: "plan_bQSeOmkWDoRl3",
+    url: "https://whop.com/checkout/plan_bQSeOmkWDoRl3/?d2c=true",
+    name: "HYBRID · Yıllık",
+    tagline: "BIST + WallStreet · En avantajlı",
+    price: "20.500",
+    currency: "TL",
+    period: "12 ay",
+    note: "KDV Dahil",
+    featured: true,
+    badge: "%30+ Tasarruf",
+    cta: "HYBRID Yıllık Satın Al",
+    features: [
+      "BIST Terminal — TF AL/SAT, Hedge Wall, Sentiment",
+      "WallStreet Terminal — Opus Wall, Net GEX, Vanna",
+      "5-15-60-120 dk. tam BIST veri seti",
+      "0DTE Map · Greeks Heatmap · Interval Map",
+      "Opra · Alpaca · Deribit · MS SQL canlı akışlar",
+      "Özel Haftalık BIST + WS Bülteni",
+      { t: "1 Yıllık TradingView PremiumAlgo Paketi", trend: true },
+      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Opsiyon 101 Eğitim Paketi (Ücretsiz)", sparkle: true },
       "Öncelikli destek & erken erişim",
     ],
   },
@@ -108,13 +165,17 @@ const WS_PLANS = [
 const TABS = [
   { id: "bist", label: "BIST Terminal", color: "teal", plans: BIST_PLANS },
   { id: "ws", label: "WallStreet Terminal", color: "amber", plans: WS_PLANS },
+  { id: "hybrid", label: "HYBRID · BIST + WS", color: "purple", plans: HYBRID_PLANS },
 ];
 
 export default function Pricing() {
   const [active, setActive] = useState("bist");
   const [openPlan, setOpenPlan] = useState(null);
   const current = TABS.find((t) => t.id === active);
-  const accentColor = active === "bist" ? "#26a69a" : "#f59e0b";
+  const accentColor =
+    active === "bist" ? "#26a69a" : active === "ws" ? "#f59e0b" : "#a855f7";
+  const accentSecondary =
+    active === "bist" ? "#0f5132" : active === "ws" ? "#d97706" : "#5b21b6";
 
   return (
     <section id="pricing" data-testid="pricing-section" className="relative py-24 lg:py-32">
@@ -127,11 +188,12 @@ export default function Pricing() {
           <h2 className="font-display font-black tracking-tighter text-4xl md:text-5xl lg:text-6xl text-white leading-[1.02]">
             İki piyasa.
             <br />
-            <span className="text-amber-400 text-glow-amber">Dört ayrıcalıklı paket.</span>
+            <span className="text-amber-400 text-glow-amber">Altı ayrıcalıklı paket.</span>
           </h2>
           <p className="mt-5 text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
             Her piyasanın kendine özgü algoritması, kendine özgü paketi.
-            Ödemeler Whop güvencesi altında — sayfadan çıkmadan tamamlanır.
+            Tek seferde iki piyasaya birden erişmek isteyenler için yeni{" "}
+            <span className="text-amber-400 font-medium">HYBRID</span> paket.
           </p>
         </div>
 
@@ -153,7 +215,7 @@ export default function Pricing() {
                 <span className="inline-flex items-center gap-2">
                   <span
                     className="h-1.5 w-1.5 rounded-full dot-pulse"
-                    style={{ background: t.id === "bist" ? "#26a69a" : "#f59e0b" }}
+                    style={{ background: t.id === "bist" ? "#26a69a" : t.id === "ws" ? "#f59e0b" : "#a855f7" }}
                   />
                   {t.label}
                 </span>
@@ -172,12 +234,13 @@ export default function Pricing() {
               key={p.id}
               plan={p}
               accent={accentColor}
+              accentSecondary={accentSecondary}
               onBuy={() => setOpenPlan(p)}
             />
           ))}
         </div>
 
-        {/* Bonus strip (BIST + WS shared) */}
+        {/* Bonus strip (HYBRID + WS shared) */}
         <div className="mt-10 relative glass rounded-2xl p-6 lg:p-8 overflow-hidden">
           <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
           <div className="relative flex flex-col md:flex-row items-start md:items-center gap-5">
@@ -186,7 +249,7 @@ export default function Pricing() {
             </div>
             <div className="flex-1">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-400">
-                BONUS · WallStreet paketlerine dahil
+                BONUS · WallStreet ve HYBRID paketlerine dahil
               </div>
               <h3 className="mt-1 font-mono font-bold text-xl md:text-2xl text-white">
                 Opsiyon 101 Eğitim Paketi
@@ -204,7 +267,7 @@ export default function Pricing() {
 
         <p className="mt-10 text-center text-xs font-mono text-zinc-600 max-w-2xl mx-auto">
           * Üyelikler Whop tarafından yönetilir. Tüm planlar PrivyAlgo kullanıcı sözleşmesine
-          tabidir. ** TradingView PremiumAlgo Paketi BIST yıllık aboneliğe özel hediyedir.
+          tabidir. ** TradingView PremiumAlgo Paketi BIST ve HYBRID yıllık aboneliklere özel hediyedir.
         </p>
       </div>
 
@@ -213,7 +276,7 @@ export default function Pricing() {
   );
 }
 
-function PlanCard({ plan, accent, onBuy }) {
+function PlanCard({ plan, accent, accentSecondary, onBuy }) {
   const isFeatured = plan.featured;
   return (
     <article
@@ -278,7 +341,15 @@ function PlanCard({ plan, accent, onBuy }) {
         {plan.features.map((f, i) => {
           const isObj = typeof f === "object";
           const text = isObj ? f.t : f;
-          const Icon = isObj ? (f.chat ? MessageCircle : f.trend ? TrendingUp : Check) : Check;
+          const Icon = isObj
+            ? f.chat
+              ? MessageCircle
+              : f.trend
+                ? TrendingUp
+                : f.sparkle
+                  ? Sparkles
+                  : Check
+            : Check;
           return (
             <li key={i} className="flex items-start gap-3">
               <span
@@ -303,7 +374,7 @@ function PlanCard({ plan, accent, onBuy }) {
         className="cta-shine mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all active:scale-95"
         style={{
           background: isFeatured
-            ? `linear-gradient(135deg, ${accent} 0%, ${plan.market === "BIST" ? "#0f5132" : "#d97706"} 100%)`
+            ? `linear-gradient(135deg, ${accent} 0%, ${accentSecondary} 100%)`
             : "rgba(20,22,30,0.8)",
           color: isFeatured ? "#0b0e14" : "#fff",
           border: isFeatured ? "none" : `1px solid ${accent}55`,

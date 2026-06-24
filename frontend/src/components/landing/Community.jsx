@@ -88,11 +88,31 @@ export default function Community() {
                 })}
               </div>
 
-              <div className="mt-6 p-5 rounded-xl border-l-2 border-amber-500/60 bg-amber-500/5">
-                <p className="font-mono text-sm text-zinc-300 italic leading-relaxed">
-                  &ldquo;Piyasa rastgele değildir. Sadece çoğunluk için görünmezdir.&rdquo;
+              <div className="mt-6 p-5 rounded-xl border-l-2 border-amber-500/60 bg-amber-500/5 max-h-[420px] overflow-y-auto">
+                <p className="font-mono text-[13px] text-zinc-300 italic leading-relaxed">
+                  &ldquo;Piyasalarda kazanırken şans diye bir şey yoktur; sadece erişilemeyen
+                  veriler ve algoritmalar vardır. Çoğu yatırımcı, fiyatların piyasa haberleriyle
+                  veya tesadüfi dalgalanmalarla yön bulduğuna inanır. Yanılıyorlar.
                 </p>
-                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-amber-400">
+                <p className="mt-3 font-mono text-[13px] text-zinc-300 italic leading-relaxed">
+                  Ekranınızın arkasında devasa, sessiz ve &lsquo;görünmez&rsquo; bir veri
+                  havuzu çalışıyor: Gamma seviyeleri, Delta pozisyonları, Vanna akışları,
+                  emir defterlerinin gizli dinamikleri ve daha birçok faktör piyasayı
+                  saniye saniye yönlendirir... Yani piyasalar rastgele hareket etmez; bu
+                  fark edemediğiniz devasa verilere paralel olarak, büyük likidite
+                  akışlarının kurduğu raylar üzerinde ilerler.
+                </p>
+                <p className="mt-3 font-mono text-[13px] text-zinc-300 italic leading-relaxed">
+                  Wall Street&apos;in karmaşık ağlarından BIST&apos;in derinliklerine kadar,
+                  fiyatı hareket ettiren o &lsquo;görünmez&rsquo; ve &lsquo;takibi
+                  imkânsız&rsquo; sanılan gücü ekranınıza taşıyoruz. nFinans çatısı altında
+                  karanlıkta kalan bu verileri aydınlatıyor; piyasadaki yatırımcıların
+                  %90&apos;ının mahrum olduğu bu gizli haritaları, gelişmiş{" "}
+                  <span className="text-amber-400 not-italic font-semibold">PrivyAlgo</span>{" "}
+                  algoritmaları ve terminalleriyle siz bireysel yatırımcılar için görünür
+                  kılıyoruz.&rdquo;
+                </p>
+                <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-amber-400">
                   — nFinans Araştırma
                 </div>
               </div>

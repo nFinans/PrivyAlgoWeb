@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { X, ExternalLink, ShieldCheck, Sparkles } from "lucide-react";
+import { X, ShieldCheck, Sparkles } from "lucide-react";
 
 const WHOP_LOADER_SRC = "https://js.whop.com/static/checkout/loader.js";
 
@@ -47,7 +47,13 @@ export default function WhopModal({ plan, onClose }) {
   if (!plan) return null;
 
   const isBist = plan.market === "BIST";
-  const accent = isBist ? "#26a69a" : "#f59e0b";
+  const isHybrid = plan.market === "HYBRID";
+  const accent = isHybrid ? "#a855f7" : isBist ? "#26a69a" : "#f59e0b";
+  const marketLabel = isHybrid
+    ? "HYBRID · BIST + WallStreet"
+    : isBist
+      ? "BIST"
+      : "WallStreet";
 
   return (
     <div
@@ -86,7 +92,7 @@ export default function WhopModal({ plan, onClose }) {
             </div>
             <div className="min-w-0">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em]" style={{ color: accent }}>
-                {isBist ? "// güvenli ödeme · whop · BIST" : "// güvenli ödeme · whop · WallStreet"}
+                // güvenli ödeme · whop · {marketLabel}
               </div>
               <h3 className="mt-0.5 font-mono font-bold text-sm md:text-base text-white truncate">
                 {plan.name} ·{" "}
@@ -97,16 +103,6 @@ export default function WhopModal({ plan, onClose }) {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <a
-              href={plan.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-1.5 rounded border border-white/10 text-zinc-400 hover:text-white hover:border-amber-500/50 transition"
-              data-testid="whop-open-new-tab"
-            >
-              <ExternalLink className="w-3 h-3" />
-              Yeni Sekmede Aç
-            </a>
             <button
               onClick={onClose}
               className="w-9 h-9 rounded-md flex items-center justify-center border border-white/10 hover:border-red-400/60 hover:text-red-400 text-zinc-400 transition"
@@ -118,7 +114,7 @@ export default function WhopModal({ plan, onClose }) {
           </div>
         </div>
 
-        {/* Bonus banner (WS only) */}
+        {/* Bonus banner (WS + HYBRID) */}
         {!isBist && (
           <div className="mx-5 md:mx-7 mt-5 rounded-xl border border-amber-500/25 bg-amber-500/[0.05] p-4 flex items-start gap-3">
             <Sparkles className="h-5 w-5 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -144,17 +140,7 @@ export default function WhopModal({ plan, onClose }) {
             data-testid={`whop-embed-${plan.id}`}
           />
           <div className="text-center text-[10px] font-mono text-zinc-600 py-3 px-4">
-            Ödeme sayfası açılmıyorsa{" "}
-            <a
-              href={plan.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-              style={{ color: accent }}
-            >
-              yeni sekmede açın
-            </a>
-            .
+            Ödeme sayfası yüklenemediyse pencereyi kapatıp tekrar deneyin.
           </div>
         </div>
       </div>
