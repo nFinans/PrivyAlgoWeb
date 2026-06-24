@@ -1,5 +1,5 @@
 import React from "react";
-import { Terminal, AlertTriangle, Mail } from "lucide-react";
+import { AlertTriangle, Mail } from "lucide-react";
 
 export default function FooterSection() {
   return (
@@ -11,15 +11,20 @@ export default function FooterSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Brand */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3">
               <div
-                className="h-9 w-9 rounded-md flex items-center justify-center"
+                className="h-10 w-10 rounded-md flex items-center justify-center overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, rgba(38,166,154,0.18) 0%, rgba(245,158,11,0.22) 100%)",
+                  background: "#000",
                   border: "1px solid rgba(245,158,11,0.40)",
                 }}
               >
-                <Terminal className="h-4 w-4 text-amber-400" strokeWidth={2.5} />
+                <img
+                  src="/logo.png"
+                  alt="PrivyAlgo"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="font-mono leading-tight">
                 <div className="text-[15px] font-bold tracking-tight text-white">PrivyAlgo</div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Terminal, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const links = [
   { label: "Canlı Piyasalar", href: "#markets", external: false },
@@ -23,23 +23,25 @@ export default function Navbar() {
         <div className="h-16 flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#top"
+            href="/"
             data-testid="navbar-logo"
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-3 group"
           >
-            <div className="relative">
-              <div
-                className="h-9 w-9 rounded-md flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(38,166,154,0.18) 0%, rgba(245,158,11,0.22) 100%)",
-                  border: "1px solid rgba(245,158,11,0.40)",
-                  boxShadow:
-                    "0 0 30px rgba(245,158,11,0.25), inset 0 0 12px rgba(38,166,154,0.18)",
-                }}
-              >
-                <Terminal className="h-4 w-4 text-amber-400" strokeWidth={2.5} />
-              </div>
+            <div
+              className="relative h-10 w-10 rounded-md flex items-center justify-center overflow-hidden"
+              style={{
+                background: "#000",
+                border: "1px solid rgba(245,158,11,0.40)",
+                boxShadow:
+                  "0 0 30px rgba(245,158,11,0.25), inset 0 0 12px rgba(38,166,154,0.18)",
+              }}
+            >
+              <img
+                src="/logo.png"
+                alt="PrivyAlgo · Predictive Complex Data Analytics"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
             </div>
             <div className="font-mono leading-tight">
               <div className="text-[15px] font-bold tracking-tight text-white">
