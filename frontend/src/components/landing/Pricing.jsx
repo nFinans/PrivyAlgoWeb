@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Check, Sparkles, ArrowRight, Crown, MessageCircle, TrendingUp, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Check, ArrowRight, Crown, MessageCircle, TrendingUp, BookOpen, Sparkles, AlertCircle } from "lucide-react";
 import WhopModal from "@/components/landing/WhopModal";
 
 const BIST_PLANS = [
@@ -278,6 +279,18 @@ export default function Pricing() {
 
 function PlanCard({ plan, accent, accentSecondary, onBuy }) {
   const isFeatured = plan.featured;
+  const [agreed, setAgreed] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const handleClick = () => {
+    if (!agreed) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    onBuy();
+  };
+
   return (
     <article
       data-testid={`pricing-card-${plan.id}`}
@@ -367,18 +380,88 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
         })}
       </ul>
 
+      {/* KVKK + Sözleşme onayı */}
+      <label
+        data-testid={`pricing-consent-${plan.id}`}
+        className="mt-7 flex items-start gap-3 cursor-pointer group select-none"
+      >
+        <span
+          className="mt-0.5 flex-shrink-0 h-[18px] w-[18px] rounded-[4px] flex items-center justify-center transition-all"
+          style={{
+            background: agreed ? accent : "rgba(20,22,30,0.8)",
+            border: `1.5px solid ${agreed ? accent : showError ? "#ef4444" : "rgba(255,255,255,0.20)"}`,
+            boxShadow: agreed ? `0 0 12px ${accent}55` : "none",
+          }}
+        >
+          {agreed && <Check className="h-3 w-3 text-black" strokeWidth={4} />}
+        </span>
+        <input
+          type="checkbox"
+          className="sr-only"
+          checked={agreed}
+          onChange={(e) => {
+            setAgreed(e.target.checked);
+            if (e.target.checked) setShowError(false);
+          }}
+          data-testid={`pricing-consent-checkbox-${plan.id}`}
+          aria-label="Yasal metinleri okudum, kabul ediyorum"
+        />
+        <span className="font-mono text-[11px] leading-relaxed text-zinc-400 group-hover:text-zinc-300 transition-colors">
+          <Link
+            to="/kvkk-aydinlatma-metni"
+            target="_blank"
+            onClick={(e) => e.stopPropagation()}
+            className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+          >
+            KVKK Aydınlatma Metni
+          </Link>
+          ,{" "}
+          <Link
+            to="/uyelik-sozlesmesi"
+            target="_blank"
+            onClick={(e) => e.stopPropagation()}
+            className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+          >
+            Üyelik Sözleşmesi
+          </Link>
+          {" "}ve{" "}
+          <Link
+            to="/gizlilik-politikasi"
+            target="_blank"
+            onClick={(e) => e.stopPropagation()}
+            className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+          >
+            Gizlilik Politikası
+          </Link>
+          &apos;nı okudum, kabul ediyorum.
+        </span>
+      </label>
+
+      {showError && !agreed && (
+        <div
+          data-testid={`pricing-consent-error-${plan.id}`}
+          className="mt-3 flex items-center gap-2 px-3 py-2 rounded-md border border-red-500/40 bg-red-500/10 font-mono text-[11px] text-red-300"
+        >
+          <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
+          Devam etmek için yasal metinleri onaylamanız gerekir.
+        </div>
+      )}
+
       {/* CTA */}
       <button
-        onClick={onBuy}
+        onClick={handleClick}
         data-testid={`pricing-cta-${plan.id}`}
-        className="cta-shine mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all active:scale-95"
+        disabled={false}
+        className={`cta-shine mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all active:scale-95 ${
+          !agreed ? "opacity-50 hover:opacity-70 cursor-not-allowed" : ""
+        }`}
         style={{
           background: isFeatured
             ? `linear-gradient(135deg, ${accent} 0%, ${accentSecondary} 100%)`
             : "rgba(20,22,30,0.8)",
           color: isFeatured ? "#0b0e14" : "#fff",
           border: isFeatured ? "none" : `1px solid ${accent}55`,
-          boxShadow: isFeatured ? `0 0 30px ${accent}40` : "none",
+          boxShadow: isFeatured && agreed ? `0 0 30px ${accent}40` : "none",
         }}
       >
         {plan.cta}
