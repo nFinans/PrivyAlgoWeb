@@ -1,0 +1,94 @@
+/* Legal pages prose styling */
+.legal-prose {
+  color: #c7cad3;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.legal-prose h2 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+.legal-prose h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: #f5b542;
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.legal-prose p {
+  margin-bottom: 16px;
+  color: #b6bac4;
+}
+
+.legal-prose strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.legal-prose ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.legal-prose ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: #b6bac4;
+}
+
+.legal-prose ul li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.legal-prose ol {
+  list-style: decimal;
+  padding-left: 22px;
+  margin-bottom: 20px;
+  color: #b6bac4;
+}
+
+.legal-prose ol li {
+  margin-bottom: 8px;
+}
+
+.legal-prose a {
+  color: #fbbf24;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.legal-prose a:hover {
+  color: #fde68a;
+}
+
+.legal-prose .legal-note {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-left: 2px solid rgba(245, 158, 11, 0.55);
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f3f4f6;
+  line-height: 1.65;
+}

@@ -1,5 +1,6 @@
 import React from "react";
-import { AlertTriangle, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { AlertTriangle, FileText, ShieldCheck, Scale, MessageCircle } from "lucide-react";
 
 export default function FooterSection() {
   return (
@@ -80,35 +81,44 @@ export default function FooterSection() {
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-500 mb-3">
                 Destek
               </div>
-              <ul className="space-y-2 font-mono text-sm text-zinc-400">
+              <ul className="space-y-2.5 font-mono text-sm text-zinc-400">
                 <li>
                   <a
-                    href="mailto:privyalgo@gmail.com"
-                    data-testid="footer-link-email"
+                    href="https://wa.me/905415478141"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="footer-link-whatsapp"
+                    className="inline-flex items-center gap-2 hover:text-teal-300 transition-colors"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-teal-400" /> WhatsApp Destek
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    to="/kvkk-aydinlatma-metni"
+                    data-testid="footer-link-kvkk"
                     className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
                   >
-                    <Mail className="w-3.5 h-3.5" /> privyalgo@gmail.com
-                  </a>
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> KVKK Aydınlatma Metni
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://bist.privyalgo.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-400 transition-colors"
+                  <Link
+                    to="/uyelik-sozlesmesi"
+                    data-testid="footer-link-uyelik"
+                    className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
                   >
-                    bist.privyalgo.com
-                  </a>
+                    <Scale className="w-3.5 h-3.5 text-amber-400" /> Üyelik Sözleşmesi
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://wallstreet.privyalgo.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-amber-400 transition-colors"
+                  <Link
+                    to="/gizlilik-politikasi"
+                    data-testid="footer-link-gizlilik"
+                    className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
                   >
-                    wallstreet.privyalgo.com
-                  </a>
+                    <FileText className="w-3.5 h-3.5 text-amber-400" /> Gizlilik Politikamız
+                  </Link>
                 </li>
               </ul>
             </div>
