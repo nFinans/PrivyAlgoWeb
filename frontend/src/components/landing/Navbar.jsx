@@ -20,7 +20,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="h-16 flex items-center justify-between">
+        <div className="h-24 flex items-center justify-between">
           {/* Logo */}
           <a
             href="/"
@@ -30,7 +30,7 @@ export default function Navbar() {
             <img
               src="/logo-horizontal.png"
               alt="PrivyAlgo · Predictive Complex Data Analytics · BIST + WallStreet"
-              className="h-10 md:h-11 w-auto object-contain"
+              className="h-14 md:h-20 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 12px rgba(245,158,11,0.25))" }}
               loading="eager"
             />
