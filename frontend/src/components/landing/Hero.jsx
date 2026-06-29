@@ -67,7 +67,7 @@ export default function Hero() {
         >
           <span className="text-teal-300">BIST hisseleri</span> için{" "}
           <span className="text-white">&ldquo;şimdi al / şimdi sat&rdquo;</span>{" "}
-          akıllı sinyaller; <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          akıllı, yüksek frekanslı ve kuantatif sinyaller; <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
