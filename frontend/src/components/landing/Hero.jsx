@@ -96,6 +96,7 @@ export default function Hero() {
             BIST Terminal
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
+          
           <a
             href="https://wallstreet.privyalgo.com/"
             target="_blank"
@@ -107,6 +108,23 @@ export default function Hero() {
             WallStreet Terminal
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
+
+          <a
+            href="https://colocation.privyalgo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="hero-cta-colocation"
+            className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-mono font-bold text-sm uppercase tracking-wider hover:translate-y-[-1px] transition-all active:scale-95 glow-teal-strong"
+            style={{
+              background: "linear-gradient(135deg, #0f5132 0%, #26a69a 100%)",
+              color: "#fff",
+            }}
+          >
+            <Terminal className="h-4 w-4" strokeWidth={2.5} />
+            HFT Co-Location
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+
           <a
             href="https://www.youtube.com/playlist?list=PL6r4M5EOm1fN-f4hF9CGoPa0aGnFLtQWZ"
             target="_blank"
