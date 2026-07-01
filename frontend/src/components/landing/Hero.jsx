@@ -65,13 +65,13 @@ export default function Hero() {
           data-testid="hero-subheadline"
           className="fade-up delay-2 mt-7 max-w-3xl mx-auto text-center text-zinc-400 text-base md:text-lg leading-relaxed"
         >
-          <span className="text-teal-300">BIST hisseleri</span> için{" "}
+          <span className="text-teal-300">Privyalgo, BIST hisseleri için</span> için{" "}
           <span className="text-white">&ldquo;şimdi al / şimdi sat&rdquo;</span>{" "}
-          akıllı, yüksek frekanslı ve kuantatif sinyaller; <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          akıllı, yüksek frekanslı ve kuantatif sinyaller;Hedge Walls ve gelişmiş sentiment analizleri sağlar. <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
-          gösteren gelişmiş canlı haritalar. Borsayı{" "}
+          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı kurumsal emir akışları, sıfır gecikmeli WebSocket altyapısı ve kantitatif opsiyon modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir analitikleri GEX, VEX, DEX ve 0DTE dinamiklerini saniye saniye okuyun. Borsayı{" "}
           <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
           akan gerçek verilerle okumak için tek ekran.
         </p>
