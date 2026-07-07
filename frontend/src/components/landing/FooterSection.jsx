@@ -153,10 +153,23 @@ export default function FooterSection() {
           </div>
         </div>
 
+        {/* Data Controller */}
+        <div
+          data-testid="footer-data-controller"
+          className="mt-12 rounded-xl border border-teal-500/15 bg-teal-500/[0.03] p-5"
+        >
+          <div className="flex gap-3">
+            <ShieldCheck className="h-4 w-4 text-teal-400 mt-0.5 flex-shrink-0" />
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500 leading-relaxed">
+              <span className="text-teal-400">Veri Sorumlusu:</span> NFİNANS FİNANSAL BİLGİ TEKNOLOJİLERİ DANIŞMANLIK EĞİTİM VE TİCARET LİMİTED ŞİRKETİ, MERSİS No: 0631208828100001
+            </p>
+          </div>
+        </div>
+
         {/* Disclaimer */}
         <div
           data-testid="footer-disclaimer"
-          className="mt-12 rounded-xl border border-amber-500/15 bg-amber-500/[0.03] p-5"
+          className="mt-4 rounded-xl border border-amber-500/15 bg-amber-500/[0.03] p-5"
         >
           <div className="flex gap-3">
             <AlertTriangle className="h-4 w-4 text-amber-400 mt-0.5 flex-shrink-0" />
