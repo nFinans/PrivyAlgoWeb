@@ -7,7 +7,7 @@ const links = [
   { label: "Altyapı", href: "#technology", external: false },
   { label: "Paketler", href: "#pricing", external: false },
   { label: "Topluluk", href: "#community", external: false },
-  { label: "Blog", href: "https://www.nfinans.net", external: true },
+  { label: "Blog", href: "https://blog.privyalgo.com", external: true },
 ];
 
 export default function Navbar() {
