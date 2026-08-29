@@ -18,7 +18,7 @@ export default function MesafeliSatisSozlesmesi() {
         <strong>1.1. Satıcı Bilgileri:</strong><br />
         Unvanı: NFİNANS FİNANSAL BİLGİ TEKNOLOJİLERİ DANIŞMANLIK EĞİTİM VE TİCARET LİMİTED ŞİRKETİ<br />
         Adresi: YAZLIK YENİ MAH. TERMAL SK. A BLOK NO: 3 İÇ KAPI NO: 9 GÖLCÜK / KOCAELİ<br />
-        E-posta: [E-posta Adresiniz]<br />
+        E-posta: info@privyalgo.com<br />
         MERSİS No: 0631208828100001
       </p>
       <p>
@@ -29,7 +29,7 @@ export default function MesafeliSatisSozlesmesi() {
 
       <h2>2. Sözleşmenin Konusu</h2>
       <p>
-        İşbu Sözleşme'nin konusu, Alıcı'nın Satıcı'ya ait PrivyAlgo Web Terminali ve Uygulamaları platformu 
+        İşbu Sözleşme'nin konusu, Alıcı'nın Satıcı'ya ait PrivyAlgo Web Terminalleri,Uygulamaları, platform 
         üzerinden elektronik ortamda siparişini verdiği abonelik ve dijital hizmetlerin satışı ve teslimi 
         ile ilgili olarak hak ve yükümlülüklerin saptanmasıdır.
       </p>
@@ -43,8 +43,8 @@ export default function MesafeliSatisSozlesmesi() {
 
       <h2>4. Teslimat Şartları ve Şekli</h2>
       <p>
-        Satın alınan abonelik/hizmet, ödemenin başarılı bir şekilde iyzico altyapısı üzerinden tahsil 
-        edilmesinin ardından anında dijital olarak teslim edilir. Alıcı'nın hesabına erişim yetkisi
+        Satın alınan abonelik/hizmet, ödemenin başarılı bir şekilde ödeme altyapısı üzerinden tahsil 
+        edilmesinin ardından 24-48 saat içerinde dijital olarak teslim edilir. Alıcı'nın hesabına erişim yetkisi
         sistem tarafından otomatik olarak atanır. Herhangi bir fiziki kargo gönderimi yapılmayacaktır.
       </p>
 
