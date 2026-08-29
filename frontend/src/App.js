@@ -5,6 +5,9 @@ import PaymentSuccess from "@/pages/PaymentSuccess";
 import Kvkk from "@/pages/Kvkk";
 import UyelikSozlesmesi from "@/pages/UyelikSozlesmesi";
 import GizlilikPolitikasi from "@/pages/GizlilikPolitikasi";
+// YENİ EKLENEN SAYFALARIN İÇE AKTARILMASI
+import MesafeliSatisSozlesmesi from "@/pages/MesafeliSatisSozlesmesi";
+import IadeIptalSartlari from "@/pages/IadeIptalSartlari";
 
 function App() {
   return (
@@ -17,6 +20,11 @@ function App() {
           <Route path="/kvkk-aydinlatma-metni" element={<Kvkk />} />
           <Route path="/uyelik-sozlesmesi" element={<UyelikSozlesmesi />} />
           <Route path="/gizlilik-politikasi" element={<GizlilikPolitikasi />} />
+          
+          {/* YENİ EKLENEN YÖNLENDİRMELER */}
+          <Route path="/mesafeli-satis-sozlesmesi" element={<MesafeliSatisSozlesmesi />} />
+          <Route path="/iade-iptal-sartlari" element={<IadeIptalSartlari />} />
+          
           <Route path="*" element={<Landing />} />
         </Routes>
       </BrowserRouter>
