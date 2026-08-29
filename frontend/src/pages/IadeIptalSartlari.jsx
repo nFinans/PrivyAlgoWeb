@@ -27,9 +27,9 @@ export default function IadeIptalSartlari() {
 
       <h2>2. Abonelik İptal Şartları</h2>
       <p>
-        <strong>2.1. İleriye Dönük İptal:</strong> Hizmetlerimiz aylık, çeyreklik veya yıllık abonelik 
+        <strong>2.1. İleriye Dönük İptal:</strong> Hizmetlerimiz aylık, üç aylık, 6 aylık veya yıllık abonelik 
         modelleriyle çalışmaktadır. Devam eden bir aboneliğiniz varsa, aboneliğinizi dilediğiniz zaman 
-        kullanıcı panelinizden iptal edebilirsiniz.
+        kullanıcı panelinizden veya whatsapp hattından destek alarak iptal edebilirsiniz.
       </p>
       <p>
         <strong>2.2. Kullanım Hakkının Devamı:</strong> Aboneliğinizi iptal ettiğinizde, tahsilatı yapılmış 
