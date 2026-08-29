@@ -183,12 +183,26 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Bottom row */}
-        <div className="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="font-mono text-[11px] text-zinc-500">
+        {/* Bottom row with Payment Band */}
+        <div className="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          {/* Copyright */}
+          <div className="font-mono text-[11px] text-zinc-500 order-3 md:order-1">
             © {new Date().getFullYear()} <span className="text-white">PrivyAlgo</span>. Tüm Hakları Saklıdır.
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-600 flex items-center gap-3">
+          
+          {/* Payment Logos (iyzico requirement) */}
+          <div className="flex items-center justify-center order-1 md:order-2">
+            <img 
+              src="/logo_band_white@1X.png" 
+              alt="Güvenli Ödeme" 
+              className="h-6 md:h-7 object-contain opacity-80 hover:opacity-100 transition-opacity" 
+              loading="lazy"
+            />
+          </div>
+
+          {/* Version Info */}
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-zinc-600 flex items-center gap-3 order-2 md:order-3">
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-teal-400 dot-pulse" />
               BIST · v2.0
@@ -199,6 +213,7 @@ export default function FooterSection() {
               WS · v3.0
             </span>
           </div>
+          
         </div>
       </div>
     </footer>
