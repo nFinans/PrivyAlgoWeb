@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AlertTriangle, FileText, ShieldCheck, Scale, MessageCircle } from "lucide-react";
+// Yeni ikonlar eklendi: ShoppingCart, RefreshCcw
+import { AlertTriangle, FileText, ShieldCheck, Scale, MessageCircle, ShoppingCart, RefreshCcw } from "lucide-react";
 
 export default function FooterSection() {
   return (
@@ -111,6 +112,26 @@ export default function FooterSection() {
                     <Scale className="w-3.5 h-3.5 text-amber-400" /> Üyelik Sözleşmesi
                   </Link>
                 </li>
+                {/* YENİ EKLENEN LİNKLER */}
+                <li>
+                  <Link
+                    to="/mesafeli-satis-sozlesmesi"
+                    data-testid="footer-link-mesafeli"
+                    className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 text-amber-400" /> Mesafeli Satış Sözleşmesi
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/iade-iptal-sartlari"
+                    data-testid="footer-link-iade"
+                    className="inline-flex items-center gap-2 hover:text-amber-400 transition-colors"
+                  >
+                    <RefreshCcw className="w-3.5 h-3.5 text-amber-400" /> İade ve İptal Şartları
+                  </Link>
+                </li>
+                {/* YENİ EKLENEN LİNKLER BİTİŞ */}
                 <li>
                   <Link
                     to="/gizlilik-politikasi"
