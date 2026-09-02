@@ -5,27 +5,6 @@ import CheckoutModal from "@/components/landing/CheckoutModal";
 
 const BIST_PLANS = [
   {
-    id: "bist-test-1tl",
-    market: "BIST",
-    planId: "plan_test1tl",
-    url: "#",
-    name: "Test Plan · 1 TL",
-    tagline: "Sistem Test Paketi",
-    price: "1",
-    oldPrice: "100",
-    currency: "TL",
-    period: "test",
-    note: "KDV Dahil",
-    featured: true,
-    cta: "1 TL ile Test Et",
-    badge: "TEST",
-    features: [
-      "Supabase ve Admin Paneli Kayıt Testi",
-      "İyzico Ödeme Entegrasyon Testi",
-      "Anında Terminal Şifre Oluşturma",
-    ],
-  },
-  {
     id: "bist-6m",
     market: "BIST",
     planId: "plan_g4J6Wi1MAafMB",
@@ -385,10 +364,10 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
             ? f.chat
               ? MessageCircle
               : f.trend
-              ? TrendingUp
-              : f.sparkle
-              ? Sparkles
-              : Check
+                ? TrendingUp
+                : f.sparkle
+                  ? Sparkles
+                  : Check
             : Check;
           return (
             <li key={i} className="flex items-start gap-3">
