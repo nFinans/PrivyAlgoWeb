@@ -1,20 +1,46 @@
-import React, { useEffect } from "react";
-import { CheckCircle2, Mail, Clock, Home, X, Sparkles } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { CheckCircle2, Mail, Clock, Home, X, Sparkles, Loader2 } from "lucide-react";
 import CyberBackground from "@/components/landing/CyberBackground";
 
 /**
- * Stand-alone success page (post-Whop redirect target)
- * Also used as the inline success state inside <WhopModal />.
- *
- * Props (optional):
- *  - variant: "page" (default, full-screen) | "card" (compact, embeddable)
- *  - onClose: shown only on "card" variant — closes the modal
- *  - onHome:  callback when user clicks "Anasayfaya Dön"
+ * Stand-alone success page (post-Iyzico/Whop redirect target)
+ * Also used as the inline success state inside modals.
  */
 export default function PaymentSuccess({ variant = "page", onClose, onHome }) {
+  const [verifying, setVerifying] = useState(true);
+  const [verifiedStatus, setVerifiedStatus] = useState(null);
+
   useEffect(() => {
     if (variant === "page") {
       document.title = "Ödeme Başarılı · PrivyAlgo Terminal";
+    }
+
+    // URL'den İyzico token bilgisini yakalıyoruz
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get("token");
+
+    if (token) {
+      // Backend'deki doğrulama rotamıza istek atarak veritabanını güncelliyoruz
+      fetch("/api/payment/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Ödeme Doğrulama Sonucu:", data);
+          setVerifying(false);
+          setVerifiedStatus(data.status);
+        })
+        .catch((err) => {
+          console.error("Doğrulama Hatası:", err);
+          setVerifying(false);
+          setVerifiedStatus("error");
+        });
+    } else {
+      setVerifying(false);
     }
   }, [variant]);
 
@@ -61,11 +87,15 @@ export default function PaymentSuccess({ variant = "page", onClose, onHome }) {
                 "0 0 0 6px rgba(45,212,191,0.06), 0 0 40px rgba(45,212,191,0.4)",
             }}
           >
-            <CheckCircle2
-              className="h-10 w-10 text-teal-300"
-              strokeWidth={2.2}
-              data-testid="success-check-icon"
-            />
+            {verifying ? (
+              <Loader2 className="h-10 w-10 text-teal-300 animate-spin" />
+            ) : (
+              <CheckCircle2
+                className="h-10 w-10 text-teal-300"
+                strokeWidth={2.2}
+                data-testid="success-check-icon"
+              />
+            )}
             <div className="absolute -top-1 -right-1">
               <Sparkles className="h-4 w-4 text-amber-400" />
             </div>
@@ -77,7 +107,7 @@ export default function PaymentSuccess({ variant = "page", onClose, onHome }) {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-teal-400/30 bg-teal-400/10">
             <span className="h-1.5 w-1.5 rounded-full bg-teal-400 live-dot" />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-teal-300">
-              Ödeme Onaylandı · Whop
+              {verifying ? "Ödeme Doğrulanıyor..." : "Ödeme Onaylandı · İyzico"}
             </span>
           </div>
         </div>
@@ -106,7 +136,7 @@ export default function PaymentSuccess({ variant = "page", onClose, onHome }) {
         <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
           <InfoTile icon={Clock} label="Bekleme" value="≤ 24 saat" accent="#2dd4bf" />
           <InfoTile icon={Mail} label="Teslim" value="E-posta" accent="#f59e0b" />
-          <InfoTile icon={CheckCircle2} label="Durum" value="Onaylandı" accent="#a855f7" />
+          <InfoTile icon={CheckCircle2} label="Durum" value={verifying ? "Kontrol..." : "Ödendi"} accent="#a855f7" />
         </div>
 
         {/* Note */}
