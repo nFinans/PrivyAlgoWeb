@@ -72,7 +72,7 @@ export default function CheckoutModal({ plan, onClose }) {
     const fullGsm = `${activePrefix}${formData.gsmNumber.replace(/^0+/, "")}`;
 
     try {
-      const response = await fetch("https://www.privyalgo.com/api/payment/initialize", {
+      const response = await fetch("/api/payment/initialize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
