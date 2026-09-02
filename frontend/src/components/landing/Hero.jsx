@@ -14,11 +14,11 @@ const tickers = [
   { sym: "SISE", val: "97.58", chg: "-2.42%", sig: "NEGATİF", up: false, mkt: "BIST" },
   // WS
   { sym: "SPX", val: "4,508.32", chg: "+0.42%", sig: "POZ GAMMA", up: true, mkt: "US" },
-  { sym: "QQQ", val: "382.11", chg: "+1.08%", sig: "BULL", up: true, mkt: "US" },
+  { sym: "QQQ", val: "382.11", chg: "+1.08%", sig: "GÜÇLÜ", up: true, mkt: "US" },
   { sym: "VIX", val: "13.84", chg: "-3.21%", sig: "DÜŞÜK", up: false, mkt: "US" },
   { sym: "GEX·NET", val: "+1.42B", chg: "POZ", sig: "HEDGE", up: true, mkt: "US" },
   { sym: "0DTE", val: "62%", chg: "↑", sig: "ELEVATED", up: true, mkt: "US" },
-  { sym: "BTC", val: "104,250", chg: "+2.14%", sig: "BULL", up: true, mkt: "CRYPTO" },
+  { sym: "BTC", val: "104,250", chg: "+2.14%", sig: "ZAYIF", up: true, mkt: "CRYPTO" },
 ];
 
 export default function Hero() {
