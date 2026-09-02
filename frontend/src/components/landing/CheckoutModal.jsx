@@ -57,7 +57,14 @@ export default function CheckoutModal({ plan, onClose }) {
     setLoading(true);
     setError("");
 
-    // Kullanıcı "Diğer" seçtiyse manuel yazdığı kodu al, yoksa listedekini kullan
+    // Şifre Güvenlik Kontrolü: En az 1 harf ve 1 rakam içermeli
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)/;
+    if (!passwordRegex.test(formData.password)) {
+      setError("Terminal şifresi en az bir harf ve bir rakam içermelidir.");
+      setLoading(false);
+      return;
+    }
+
     const activePrefix = formData.countryCode === "OTHER" 
       ? (formData.manualCountryCode.startsWith("+") ? formData.manualCountryCode : `+${formData.manualCountryCode}`)
       : formData.countryCode;
@@ -65,7 +72,7 @@ export default function CheckoutModal({ plan, onClose }) {
     const fullGsm = `${activePrefix}${formData.gsmNumber.replace(/^0+/, "")}`;
 
     try {
-      const response = await fetch("/api/payment/initialize", {
+      const response = await fetch("https://www.privyalgo.com/api/payment/initialize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -114,7 +121,6 @@ export default function CheckoutModal({ plan, onClose }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
           <div className="flex items-center gap-3">
             <div
@@ -145,7 +151,6 @@ export default function CheckoutModal({ plan, onClose }) {
           </div>
         )}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-3.5">
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -187,7 +192,6 @@ export default function CheckoutModal({ plan, onClose }) {
             />
           </div>
 
-          {/* Telefon & Ülke Kodları / Manuel Giriş */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Cep Telefonu</label>
@@ -243,7 +247,6 @@ export default function CheckoutModal({ plan, onClose }) {
             </div>
           </div>
 
-          {/* Adres, İlçe ve Şehir */}
           <div className="space-y-3">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Fatura Adresi (Cadde, Sokak, No)</label>
@@ -285,7 +288,6 @@ export default function CheckoutModal({ plan, onClose }) {
             </div>
           </div>
 
-          {/* Terminal Bilgileri */}
           <div className="grid grid-cols-2 gap-3 pt-2 border-t border-white/10">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Terminal Kullanıcı Adı</label>
@@ -300,7 +302,7 @@ export default function CheckoutModal({ plan, onClose }) {
               />
             </div>
             <div>
-              <label className="block font-mono text-[11px] text-zinc-400 mb-1">Terminal Şifresi</label>
+              <label className="block font-mono text-[11px] text-zinc-400 mb-1">Terminal Şifresi (Harf ve Rakam)</label>
               <input
                 type="password"
                 name="password"
@@ -308,7 +310,7 @@ export default function CheckoutModal({ plan, onClose }) {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
-                placeholder="Şifreniz"
+                placeholder="En az 1 harf, 1 rakam"
               />
             </div>
           </div>
