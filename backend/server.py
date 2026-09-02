@@ -59,11 +59,11 @@ class PaymentRequest(BaseModel):
 class VerifyPaymentRequest(BaseModel):
     token: str
 
-# IYZICO Ayarları
+# IYZICO Test Ayarları
 iyzico_options = {
     'api_key': os.environ.get('IYZICO_API_KEY', '').strip(),
     'secret_key': os.environ.get('IYZICO_SECRET_KEY', '').strip(),
-    'base_url': 'api.iyzipay.com'
+    'base_url': 'sandbox-api.iyzipay.com'
 }
 
 @api_router.get("/")
