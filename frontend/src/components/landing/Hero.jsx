@@ -71,9 +71,10 @@ export default function Hero() {
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
-          gösteren gelişmiş canlı haritalar sunar.<span className="text-white">  PrivyAlgo Veri Analiz Araçları ile Piyasa Mekaniklerini Yeniden Tanımlayın.</span> Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile analiz edin. <span className="text-teal-300">Wall Street'in  & Bist' in kara kutusunu PrivyAlgo Analiz Araçları ile aydınlatın.</span> Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. <span className="block mt-5 text-lg md:text-xl font-semibold text-zinc-100 tracking-wide">Borsaları{" "}
-          <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
-          akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.</span>
+          gösteren gelişmiş canlı haritalar sunar.<span className="text-white">  PrivyAlgo Veri Analiz Araçları ile Piyasa Mekaniklerini Yeniden Tanımlayın.</span> Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile analiz edin. <span className="text-teal-300">Wall Street'in  & Bist' in kara kutusunu PrivyAlgo Analiz Araçları ile aydınlatın.</span> Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. <span className="block mt-8 text-lg md:text-xl font-medium text-zinc-300 italic tracking-wide">
+            <span className="text-teal-500 font-serif text-3xl leading-none mr-1">&ldquo;</span>Borsaları{" "}
+          <span className="text-teal-300">yorum, dedikodu veya tahminle değil</span>; saniye saniye
+          akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.<span className="text-teal-500 font-serif text-3xl leading-none ml-1">&rdquo;</span></span>
         </p>
 
         {/* CTAs */}
