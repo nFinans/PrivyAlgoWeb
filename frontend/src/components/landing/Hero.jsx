@@ -67,11 +67,11 @@ export default function Hero() {
         >
           <span className="text-teal-300">Privyalgo, BIST hisseleri için</span> için{" "}
           <span className="text-white">&ldquo;Emir Akış Verilerinin Analizlerini sizin için anlık olarak yapar&rdquo;</span>{" "}
-          emir akış verilerine dayalı, yüksek frekanslı ve anlık sentiment (duygu) analizlerini yapar ve sizin için emir analitiklerine dayalı gelişmiş sentiment analizleri sağlar.Anlık olarak sizin için Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre Hedge Duvarlar ve Gerçek Direnç Destek Bölgelerini (RES 1-2-3/SUP1-2-3) grafikler üzerinde çizerek görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          emir akış verilerine dayalı, anlık sentiment (duygu) analizlerini yapar ve sizin için emir analitiklerine dayalı gelişmiş sentiment analizleri sağlar.Anlık olarak sizin için Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre Hedge Duvarlar ve Gerçek Direnç Destek Bölgelerini (RES 1-2-3/SUP1-2-3) grafikler üzerinde çizerek görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
-          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif opsiyon modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir analitikleri GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. Borsaları{" "}
+          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. Borsaları{" "}
           <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
           akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.
         </p>
