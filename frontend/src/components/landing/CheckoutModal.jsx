@@ -3,11 +3,25 @@ import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 
 const COUNTRY_CODES = [
   { code: "+90", label: "Türkiye (+90)" },
-  { code: "+1", label: "ABD/Kanada (+1)" },
+  { code: "+1", label: "ABD / Kanada (+1)" },
   { code: "+44", label: "İngiltere (+44)" },
   { code: "+49", label: "Almanya (+49)" },
   { code: "+33", label: "Fransa (+33)" },
   { code: "+31", label: "Hollanda (+31)" },
+  { code: "+994", label: "Azerbaycan (+994)" },
+  { code: "+43", label: "Avusturya (+43)" },
+  { code: "+32", label: "Belçika (+32)" },
+  { code: "+41", label: "İsviçre (+41)" },
+  { code: "+46", label: "İsveç (+46)" },
+  { code: "+47", label: "Norveç (+47)" },
+  { code: "+45", label: "Danimarka (+45)" },
+  { code: "+358", label: "Finlandiya (+358)" },
+  { code: "+34", label: "İspanya (+34)" },
+  { code: "+39", label: "İtalya (+39)" },
+  { code: "+30", label: "Yunanistan (+30)" },
+  { code: "+971", label: "BAE (+971)" },
+  { code: "+966", label: "Suudi Arabistan (+966)" },
+  { code: "OTHER", label: "Diğer (Manuel Gir)" }
 ];
 
 export default function CheckoutModal({ plan, onClose }) {
@@ -16,9 +30,11 @@ export default function CheckoutModal({ plan, onClose }) {
     surname: "",
     email: "",
     countryCode: "+90",
+    manualCountryCode: "",
     gsmNumber: "",
     identityNumber: "",
     address: "",
+    district: "",
     city: "",
     username: "",
     password: "",
@@ -41,8 +57,12 @@ export default function CheckoutModal({ plan, onClose }) {
     setLoading(true);
     setError("");
 
-    // Telefon numarasını ülke koduyla birleştir (Örn: +905555555555)
-    const fullGsm = `${formData.countryCode}${formData.gsmNumber.replace(/^0+/, "")}`;
+    // Kullanıcı "Diğer" seçtiyse manuel yazdığı kodu al, yoksa listedekini kullan
+    const activePrefix = formData.countryCode === "OTHER" 
+      ? (formData.manualCountryCode.startsWith("+") ? formData.manualCountryCode : `+${formData.manualCountryCode}`)
+      : formData.countryCode;
+
+    const fullGsm = `${activePrefix}${formData.gsmNumber.replace(/^0+/, "")}`;
 
     try {
       const response = await fetch("/api/payment/initialize", {
@@ -58,6 +78,7 @@ export default function CheckoutModal({ plan, onClose }) {
           gsmNumber: fullGsm,
           identityNumber: formData.identityNumber,
           address: formData.address,
+          district: formData.district,
           city: formData.city,
           username: formData.username,
           password: formData.password,
@@ -166,7 +187,7 @@ export default function CheckoutModal({ plan, onClose }) {
             />
           </div>
 
-          {/* Telefon (Ülke Kodlu) & TC */}
+          {/* Telefon & Ülke Kodları / Manuel Giriş */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Cep Telefonu</label>
@@ -175,14 +196,27 @@ export default function CheckoutModal({ plan, onClose }) {
                   name="countryCode"
                   value={formData.countryCode}
                   onChange={handleChange}
-                  className="bg-zinc-900 border border-white/10 rounded-lg px-2 py-2 text-xs text-amber-400 focus:outline-none font-mono shrink-0"
+                  className="bg-zinc-900 border border-white/10 rounded-lg px-2 py-2 text-xs text-amber-400 focus:outline-none font-mono shrink-0 max-w-[110px]"
                 >
                   {COUNTRY_CODES.map((c) => (
                     <option key={c.code} value={c.code} className="bg-zinc-900 text-white">
-                      {c.code}
+                      {c.label.split(" ")[0]} {c.code !== "OTHER" ? c.code : ""}
                     </option>
                   ))}
                 </select>
+
+                {formData.countryCode === "OTHER" && (
+                  <input
+                    type="text"
+                    name="manualCountryCode"
+                    required
+                    value={formData.manualCountryCode}
+                    onChange={handleChange}
+                    className="w-16 bg-zinc-900 border border-white/10 rounded-lg px-2 py-2 text-xs text-white focus:outline-none focus:border-amber-400 font-mono"
+                    placeholder="+91"
+                  />
+                )}
+
                 <input
                   type="text"
                   name="gsmNumber"
@@ -209,10 +243,10 @@ export default function CheckoutModal({ plan, onClose }) {
             </div>
           </div>
 
-          {/* Fatura Adresi ve İl */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="col-span-2">
-              <label className="block font-mono text-[11px] text-zinc-400 mb-1">Fatura Adresi</label>
+          {/* Adres, İlçe ve Şehir */}
+          <div className="space-y-3">
+            <div>
+              <label className="block font-mono text-[11px] text-zinc-400 mb-1">Fatura Adresi (Cadde, Sokak, No)</label>
               <input
                 type="text"
                 name="address"
@@ -220,20 +254,34 @@ export default function CheckoutModal({ plan, onClose }) {
                 value={formData.address}
                 onChange={handleChange}
                 className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
-                placeholder="Mahalle, Cadde, No..."
+                placeholder="Örn: Atatürk Cad. No: 15/4"
               />
             </div>
-            <div>
-              <label className="block font-mono text-[11px] text-zinc-400 mb-1">İl / Şehir</label>
-              <input
-                type="text"
-                name="city"
-                required
-                value={formData.city}
-                onChange={handleChange}
-                className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
-                placeholder="Örn: İstanbul"
-              />
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block font-mono text-[11px] text-zinc-400 mb-1">İlçe</label>
+                <input
+                  type="text"
+                  name="district"
+                  required
+                  value={formData.district}
+                  onChange={handleChange}
+                  className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                  placeholder="Örn: Kadıköy"
+                />
+              </div>
+              <div>
+                <label className="block font-mono text-[11px] text-zinc-400 mb-1">Şehir (İl)</label>
+                <input
+                  type="text"
+                  name="city"
+                  required
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                  placeholder="Örn: İstanbul"
+                />
+              </div>
             </div>
           </div>
 
