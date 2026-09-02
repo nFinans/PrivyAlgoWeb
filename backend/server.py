@@ -55,9 +55,9 @@ class PaymentRequest(BaseModel):
 
 # IYZICO Ayarları
 iyzico_options = {
-    'api_key': os.environ.get('IYZICO_API_KEY'),
-    'secret_key': os.environ.get('IYZICO_SECRET_KEY'),
-    'base_url': os.environ.get('IYZICO_BASE_URL')
+    'api_key': os.environ.get('IYZICO_API_KEY').strip(),
+    'secret_key': os.environ.get('IYZICO_SECRET_KEY').strip(),
+    'base_url': os.environ.get('IYZICO_BASE_URL').strip().rstrip('/')
 }
 
 @api_router.get("/")
