@@ -10,6 +10,7 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 import iyzipay
+import json  # HATA ÇÖZÜMÜ İÇİN EKLENDİ
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -57,7 +58,7 @@ class PaymentRequest(BaseModel):
 iyzico_options = {
     'api_key': os.environ.get('IYZICO_API_KEY', '').strip(),
     'secret_key': os.environ.get('IYZICO_SECRET_KEY', '').strip(),
-    'base_url': 'api.iyzipay.com'
+    'base_url': 'https://api.iyzipay.com'
 }
 
 @api_router.get("/")
@@ -136,7 +137,17 @@ async def initialize_payment(request: PaymentRequest):
         }
 
         checkout_form_initialize = iyzipay.CheckoutFormInitialize().create(request_data, iyzico_options)
-        result = checkout_form_initialize.read()
+        
+        # HATA ÇÖZÜMÜ BURADA: Gelen ham veriyi önce yakalıyoruz
+        raw_result = checkout_form_initialize.read()
+        
+        # Eğer veri bytes ise decode edip JSON sözlüğüne çeviriyoruz
+        if isinstance(raw_result, bytes):
+            result = json.loads(raw_result.decode('utf-8'))
+        elif isinstance(raw_result, str):
+            result = json.loads(raw_result)
+        else:
+            result = raw_result
 
         if result.get('status') == 'success':
             return {
