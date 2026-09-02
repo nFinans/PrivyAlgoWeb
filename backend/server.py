@@ -36,7 +36,7 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# --- GÜNCELLENMİŞ ÖDEME MODELİ (İlçe ve Adres Dahil) ---
+# Ödeme İstek Modeli
 class PaymentRequest(BaseModel):
     planId: str
     planName: str
@@ -53,7 +53,7 @@ class PaymentRequest(BaseModel):
     password: str
     userIp: str = "85.34.78.112"
 
-# --- IYZICO AYARLARI ---
+# IYZICO Ayarları
 iyzico_options = {
     'api_key': os.environ.get('IYZICO_API_KEY'),
     'secret_key': os.environ.get('IYZICO_SECRET_KEY'),
@@ -83,7 +83,7 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     return status_checks
 
-# --- GÜNCELLENMİŞ ÖDEME ROTASI ---
+# İyzico Ödeme Başlatma Rotası
 @api_router.post("/payment/initialize")
 async def initialize_payment(request: PaymentRequest):
     try:
