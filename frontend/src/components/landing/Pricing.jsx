@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Crown, MessageCircle, TrendingUp, BookOpen, Sparkles, AlertCircle } from "lucide-react";
-import WhopModal from "@/components/landing/WhopModal";
+// WhopModal importu geçici olarak kapatıldı
+// import WhopModal from "@/components/landing/WhopModal";
 
 const BIST_PLANS = [
   {
@@ -268,7 +269,6 @@ export default function Pricing() {
               + Ücretsiz Bonus
             </div>
           </div>
-          
         </div>
 
         <p className="mt-10 text-center text-xs font-mono text-zinc-600 max-w-2xl mx-auto">
@@ -277,7 +277,8 @@ export default function Pricing() {
         </p>
       </div>
 
-      <WhopModal plan={openPlan} onClose={() => setOpenPlan(null)} />
+      {/* WhopModal tamamen yorum satırına alınarak iptal edildi */}
+      {/* <WhopModal plan={openPlan} onClose={() => setOpenPlan(null)} /> */}
     </section>
   );
 }
@@ -287,13 +288,9 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
   const [agreed, setAgreed] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  const handleClick = () => {
-    if (!agreed) {
-      setShowError(true);
-      return;
-    }
-    setShowError(false);
-    onBuy();
+  // Bu fonksiyon buton disabled olduğu için artık tetiklenmeyecek ama yapıyı korumak adına kalabilir.
+  const handleClick = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -452,25 +449,21 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
         </div>
       )}
 
-      {/* CTA */}
+      {/* CTA - PASİFE ALINMIŞ VE METNİ DEĞİŞTİRİLMİŞ BUTON */}
       <button
         onClick={handleClick}
         data-testid={`pricing-cta-${plan.id}`}
-        disabled={false}
-        className={`cta-shine mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all active:scale-95 ${
-          !agreed ? "opacity-50 hover:opacity-70 cursor-not-allowed" : ""
-        }`}
+        disabled={true}
+        className={`mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all opacity-50 cursor-not-allowed`}
         style={{
           background: isFeatured
             ? `linear-gradient(135deg, ${accent} 0%, ${accentSecondary} 100%)`
             : "rgba(20,22,30,0.8)",
           color: isFeatured ? "#0b0e14" : "#fff",
           border: isFeatured ? "none" : `1px solid ${accent}55`,
-          boxShadow: isFeatured && agreed ? `0 0 30px ${accent}40` : "none",
         }}
       >
-        {plan.cta}
-        <ArrowRight className="h-4 w-4" />
+        ÖDEME ALTYAPISI GÜNCELLENİYOR
       </button>
     </article>
   );
