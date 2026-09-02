@@ -105,15 +105,47 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     return status_checks
 
-# İyzico Ödeme Başlatma Rotası
+# İyzico Ödeme Başlatma ve Anında Veritabanına Kayıt Rotası
 @api_router.post("/payment/initialize")
 async def initialize_payment(request: PaymentRequest):
     try:
         full_address = f"{request.address}, {request.district} / {request.city}"
+        conversation_id = f"ORDER-{uuid.uuid4().hex[:8]}"
         
+        # 1. ADIM: İyzico sonucunu BEKLEMEDEN, form verilerini ve şifreleri hemen Supabase'e kaydediyoruz!
+        order_record = {
+            "order_id": conversation_id,
+            "name": request.name,
+            "surname": request.surname,
+            "email": request.email,
+            "gsmNumber": request.gsmNumber,
+            "identityNumber": request.identityNumber,
+            "address": full_address,
+            "planId": request.planId,
+            "planName": request.planName,
+            "price": request.price,
+            "terminal_username": request.username,
+            "terminal_password": request.password,
+            "payment_status": "Ödeme Başlatıldı",
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        url = f"{SUPABASE_URL}/orders"
+        headers = {
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+        }
+        async with httpx.AsyncClient() as client:
+            sup_res = await client.post(url, json=order_record, headers=headers)
+            if sup_res.status_code not in [200, 201]:
+                print(f"Supabase Kayıt Hatası: {sup_res.text}")
+
+        # 2. ADIM: İyzico Ödeme Formu Oluşturma
         request_data = {
             'locale': 'tr',
-            'conversationId': f"ORDER-{uuid.uuid4().hex[:8]}",
+            'conversationId': conversation_id,
             'price': request.price,
             'paidPrice': request.price,
             'currency': 'TRY',
@@ -158,7 +190,6 @@ async def initialize_payment(request: PaymentRequest):
         }
 
         checkout_form_initialize = iyzipay.CheckoutFormInitialize().create(request_data, iyzico_options)
-        
         raw_result = checkout_form_initialize.read()
         
         if isinstance(raw_result, bytes):
@@ -169,37 +200,6 @@ async def initialize_payment(request: PaymentRequest):
             result = raw_result
 
         if result.get('status') == 'success':
-            # Supabase Veritabanına Kayıt
-            order_record = {
-                "order_id": request_data['conversationId'],
-                "name": request.name,
-                "surname": request.surname,
-                "email": request.email,
-                "gsmNumber": request.gsmNumber,
-                "identityNumber": request.identityNumber,
-                "address": full_address,
-                "planId": request.planId,
-                "planName": request.planName,
-                "price": request.price,
-                "terminal_username": request.username,
-                "terminal_password": request.password,
-                "payment_status": "Ödeme Bekleniyor",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "iyzico_token": result.get('token')
-            }
-            
-            url = f"{SUPABASE_URL}/orders"
-            headers = {
-                "apikey": SUPABASE_KEY,
-                "Authorization": f"Bearer {SUPABASE_KEY}",
-                "Content-Type": "application/json",
-                "Prefer": "return=representation"
-            }
-            async with httpx.AsyncClient() as client:
-                sup_res = await client.post(url, json=order_record, headers=headers)
-                if sup_res.status_code not in [200, 201]:
-                    print(f"Supabase Kayıt Hatası: {sup_res.text}")
-
             return {
                 "status": "success",
                 "paymentPageUrl": result.get('paymentPageUrl'),
@@ -207,13 +207,14 @@ async def initialize_payment(request: PaymentRequest):
             }
         else:
             print("İyzico Reddedilme Hatası:", result)
+            # İyzico hata verse bile veritabanına kayıt zaten atıldı, ancak kullanıcıya hata dönüyoruz
             raise HTTPException(status_code=400, detail=result.get('errorMessage', 'Ödeme başlatılamadı'))
 
     except Exception as e:
         print(f"Sunucu Hatası: {e}")
         raise HTTPException(status_code=500, detail="Sunucu tarafında bir hata oluştu")
 
-# Şifre Korumalı Admin Paneli Sipariş Listesi Rotası (Supabase'den okur)
+# Şifre Korumalı Admin Paneli Sipariş Listesi Rotası
 @api_router.get("/admin/orders")
 async def get_admin_orders(credentials: HTTPBasicCredentials = Depends(security)):
     if credentials.username != "nFinans" or credentials.password != "Gs1905uA":
