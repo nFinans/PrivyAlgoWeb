@@ -71,7 +71,7 @@ export default function Hero() {
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
-          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. Borsaları{" "}
+          gösteren gelişmiş canlı haritalar sunar.<span className="text-white">  PrivyAlgo Veri Analiz Araçları ile Piyasa Mekaniklerini Yeniden Tanımlayın.</span> Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile analiz edin. <span className="text-teal-300">Wall Street'in  & Bist' in kara kutusunu PrivyAlgo Analiz Araçları ile aydınlatın.</span> Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. Borsaları{" "}
           <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
           akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.
         </p>
