@@ -149,11 +149,11 @@ export default function PaymentSuccess({ variant = "page", onClose, onHome }) {
             E-postanız gelmezse <span className="text-amber-300">spam / promosyon</span>{" "}
             klasörünüzü de kontrol edin. Sorularınız için{" "}
             <a
-              href="mailto:privyalgo@gmail.com"
+              href="mailto:nfinansarastirma@gmail.com"
               className="text-amber-400 hover:underline"
               data-testid="success-email-link"
             >
-              privyalgo@gmail.com
+              nfinansarastirma@gmail.com
             </a>{" "}
             adresinden bize ulaşabilirsiniz.
           </p>
