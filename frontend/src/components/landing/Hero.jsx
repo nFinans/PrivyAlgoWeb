@@ -6,12 +6,12 @@ import VolatilitySurface from "@/components/landing/VolatilitySurface";
 
 const tickers = [
   // BIST
-  { sym: "THYAO", val: "327.83", chg: "+2.45%", sig: "TF AL", up: true, mkt: "BIST" },
-  { sym: "EUPWR", val: "92.71", chg: "+4.58%", sig: "TF AL", up: true, mkt: "BIST" },
-  { sym: "GESAN", val: "95.76", chg: "+8.47%", sig: "TF AL", up: true, mkt: "BIST" },
-  { sym: "ASTOR", val: "72.33", chg: "+1.12%", sig: "TF AL", up: true, mkt: "BIST" },
-  { sym: "TOASO", val: "215.40", chg: "-1.30%", sig: "TF SAT", up: false, mkt: "BIST" },
-  { sym: "SISE", val: "97.58", chg: "-2.42%", sig: "TF SAT", up: false, mkt: "BIST" },
+  { sym: "THYAO", val: "327.83", chg: "+2.45%", sig: "POZİTİF", up: true, mkt: "BIST" },
+  { sym: "EUPWR", val: "92.71", chg: "+4.58%", sig: "POZİTİF", up: true, mkt: "BIST" },
+  { sym: "GESAN", val: "95.76", chg: "+8.47%", sig: "POZİTİF", up: true, mkt: "BIST" },
+  { sym: "ASTOR", val: "72.33", chg: "+1.12%", sig: "POZİTİF", up: true, mkt: "BIST" },
+  { sym: "TOASO", val: "215.40", chg: "-1.30%", sig: "NEGATİF", up: false, mkt: "BIST" },
+  { sym: "SISE", val: "97.58", chg: "-2.42%", sig: "NEGATİF", up: false, mkt: "BIST" },
   // WS
   { sym: "SPX", val: "4,508.32", chg: "+0.42%", sig: "POZ GAMMA", up: true, mkt: "US" },
   { sym: "QQQ", val: "382.11", chg: "+1.08%", sig: "BULL", up: true, mkt: "US" },
@@ -51,7 +51,7 @@ export default function Hero() {
         >
           İki piyasa.
           <br />
-          <span className="text-amber-400 text-glow-amber">İki Ayrı Veri Analiz Terminali</span>
+          <span className="text-amber-400 text-glow-amber">İki Ayrı Veri Analiz Yazılımı</span>
           <br />
           <span className="font-mono text-3xl md:text-4xl lg:text-5xl text-zinc-400 tracking-tight">
             <span className="text-teal-400">Borsa İstanbul</span>
@@ -67,14 +67,14 @@ export default function Hero() {
         >
           <span className="text-teal-300">Privyalgo, BIST hisseleri için</span> için{" "}
           <span className="text-white">&ldquo;Emir Akış Verilerinin Anlık Analizlerini (Sentiment/Duygu Analizi) sizin için yaparak görselleştirir&rdquo;</span>{" "}
-          Anlık olarak Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre o an ki Hedge Duvarlarını ve Destek Direnç Bölgelerinin (RES 1-2-3/SUP1-2-3)  analizini yaparak sizin için grafikler üzerinde görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          Anlık olarak Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre o an ki yoğun işlem bölgelerinin analizini yaparak Hedge Duvarlarını ve Destek-Direnç Bölgelerini sizin için grafikler üzerinde görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
           gösteren gelişmiş canlı haritalar sunar.<span className="text-white">  PrivyAlgo Veri Analiz Araçları ile Piyasa Mekaniklerini Yeniden Tanımlayın.</span> Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif veri işleme modelleri ile analiz edin. <span className="text-teal-300">Wall Street'in  & Bist' in kara kutusunu PrivyAlgo Analiz Araçları ile aydınlatın.</span> Emir Akış Analitiklerini, Sentiment analizlerini, GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. <span className="block mt-8 text-lg md:text-xl font-medium text-zinc-300 italic tracking-wide">
             <span className="text-teal-500 font-serif text-3xl leading-none mr-1">&ldquo;</span>Borsaları{" "}
           <span className="text-teal-300">yorum, dedikodu veya tahminle değil</span>; saniye saniye
-          akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.<span className="text-teal-500 font-serif text-3xl leading-none ml-1">&rdquo;</span></span>
+          akan gerçek verilerle okumak ve analiz etmek için tek yazılım<span className="text-teal-500 font-serif text-3xl leading-none ml-1">&rdquo;</span></span>
         </p>
 
         {/* CTAs */}
