@@ -66,8 +66,8 @@ export default function Hero() {
           className="fade-up delay-2 mt-7 max-w-3xl mx-auto text-center text-zinc-400 text-base md:text-lg leading-relaxed"
         >
           <span className="text-teal-300">Privyalgo, BIST hisseleri için</span> için{" "}
-          <span className="text-white">&ldquo;Emir Akış Verilerinin Analizlerini sizin için anlık olarak yapar&rdquo;</span>{" "}
-          emir akış verilerine dayalı, anlık sentiment (duygu) analizlerini yapar ve sizin için emir analitiklerine dayalı gelişmiş sentiment analizleri sağlar.Anlık olarak sizin için Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre Hedge Duvarlar ve Gerçek Direnç Destek Bölgelerini (RES 1-2-3/SUP1-2-3) grafikler üzerinde çizerek görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          <span className="text-white">&ldquo;Emir Akış Verilerinin Anlık Analizlerini (Sentiment/Duygu Analizi) sizin için yaparak görselleştirir&rdquo;</span>{" "}
+          Anlık olarak Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre o an ki Hedge Duvarlarını ve Destek Direnç Bölgelerinin (RES 1-2-3/SUP1-2-3)  analizini yaparak sizin için grafikler üzerinde görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
