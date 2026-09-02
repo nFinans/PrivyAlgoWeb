@@ -1,7 +1,7 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
@@ -10,21 +10,24 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 import iyzipay
-import json  # HATA ÇÖZÜMÜ İÇİN EKLENDİ
+import json
+import httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Supabase Ayarları
+SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://ypdtlbmizmqaagskfnlm.supabase.co/rest/v1/').rstrip('/')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY', os.environ.get('SUPABASE_SERVICE_ROLE_KEY', ''))
 
 # Create the main app without a prefix
 app = FastAPI()
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
+
+# Basic Auth for Admin Panel
+security = HTTPBasic()
 
 # Define Models
 class StatusCheck(BaseModel):
@@ -73,14 +76,32 @@ async def create_status_check(input: StatusCheckCreate):
     doc = status_obj.model_dump()
     doc['timestamp'] = doc['timestamp'].isoformat()
     
-    _ = await db.status_checks.insert_one(doc)
+    url = f"{SUPABASE_URL}/status_checks"
+    headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+    }
+    async with httpx.AsyncClient() as client:
+        await client.post(url, json=doc, headers=headers)
+        
     return status_obj
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+    url = f"{SUPABASE_URL}/status_checks?select=*"
+    headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Content-Type": "application/json"
+    }
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, headers=headers)
+        status_checks = response.json() if response.status_code == 200 else []
+        
     for check in status_checks:
-        if isinstance(check['timestamp'], str):
+        if isinstance(check.get('timestamp'), str):
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     return status_checks
 
@@ -138,10 +159,8 @@ async def initialize_payment(request: PaymentRequest):
 
         checkout_form_initialize = iyzipay.CheckoutFormInitialize().create(request_data, iyzico_options)
         
-        # HATA ÇÖZÜMÜ BURADA: Gelen ham veriyi önce yakalıyoruz
         raw_result = checkout_form_initialize.read()
         
-        # Eğer veri bytes ise decode edip JSON sözlüğüne çeviriyoruz
         if isinstance(raw_result, bytes):
             result = json.loads(raw_result.decode('utf-8'))
         elif isinstance(raw_result, str):
@@ -150,6 +169,37 @@ async def initialize_payment(request: PaymentRequest):
             result = raw_result
 
         if result.get('status') == 'success':
+            # Supabase Veritabanına Kayıt
+            order_record = {
+                "order_id": request_data['conversationId'],
+                "name": request.name,
+                "surname": request.surname,
+                "email": request.email,
+                "gsmNumber": request.gsmNumber,
+                "identityNumber": request.identityNumber,
+                "address": full_address,
+                "planId": request.planId,
+                "planName": request.planName,
+                "price": request.price,
+                "terminal_username": request.username,
+                "terminal_password": request.password,
+                "payment_status": "Ödeme Bekleniyor",
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "iyzico_token": result.get('token')
+            }
+            
+            url = f"{SUPABASE_URL}/orders"
+            headers = {
+                "apikey": SUPABASE_KEY,
+                "Authorization": f"Bearer {SUPABASE_KEY}",
+                "Content-Type": "application/json",
+                "Prefer": "return=representation"
+            }
+            async with httpx.AsyncClient() as client:
+                sup_res = await client.post(url, json=order_record, headers=headers)
+                if sup_res.status_code not in [200, 201]:
+                    print(f"Supabase Kayıt Hatası: {sup_res.text}")
+
             return {
                 "status": "success",
                 "paymentPageUrl": result.get('paymentPageUrl'),
@@ -162,6 +212,35 @@ async def initialize_payment(request: PaymentRequest):
     except Exception as e:
         print(f"Sunucu Hatası: {e}")
         raise HTTPException(status_code=500, detail="Sunucu tarafında bir hata oluştu")
+
+# Şifre Korumalı Admin Paneli Sipariş Listesi Rotası (Supabase'den okur)
+@api_router.get("/admin/orders")
+async def get_admin_orders(credentials: HTTPBasicCredentials = Depends(security)):
+    if credentials.username != "nFinans" or credentials.password != "Gs1905uA":
+        raise HTTPException(
+            status_code=401,
+            detail="Geçersiz kullanıcı adı veya şifre",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    try:
+        url = f"{SUPABASE_URL}/orders?select=*"
+        headers = {
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "Content-Type": "application/json"
+        }
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, headers=headers)
+            orders = response.json() if response.status_code == 200 else []
+            
+        return {
+            "status": "success",
+            "total_orders": len(orders),
+            "orders": orders
+        }
+    except Exception as e:
+        print(f"Admin Siparişleri Listeleme Hatası: {e}")
+        raise HTTPException(status_code=500, detail="Kayıtlar getirilemedi")
 
 app.include_router(api_router)
 
