@@ -122,7 +122,7 @@ export default function Hero() {
             }}
           >
             <Terminal className="h-4 w-4" strokeWidth={2.5} />
-            HFT Co-Location
+            HFT Co-Location Yazılımı
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
 
