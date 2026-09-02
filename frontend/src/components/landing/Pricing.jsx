@@ -8,7 +8,7 @@ const BIST_PLANS = [
     id: "bist-6m",
     market: "BIST",
     planId: "plan_g4J6Wi1MAafMB",
-    url: "https://whop.com/checkout/plan_g4J6Wi1MAafMB/?d2c=true",
+    url: "#https://whop.com/checkout/plan_g4J6Wi1MAafMB/?d2c=true",
     name: "BIST · 6 Aylık",
     tagline: "Premium Plan · 6 Ay yenilenir",
     price: "5.400",
@@ -20,10 +20,13 @@ const BIST_PLANS = [
     cta: "BIST 6 Aylık Satın Al",
     badge: "%25 Avantaj",
     features: [
-      "5-15-60-120 dk. tam veri seti",
-      "TF AL / TF SAT canlı sinyaller",
-      "Hedge Wall & MaxBuy/Sell seviyeleri",
-      "Sentiment Score & Algoritmanın Kralları",
+      "5-15-60-120 dk. periyotlarda tam veri seti",
+      "Sentimen & Oynaklık Analizleri",
+      "Emir Akışlarına Bağlı Momentum Analizleri",
+      "Emir Analitiklerine göre Hisse Bazlı Piyasa Skorlaması (Market Score)",
+      "Emir Analitiklerine göre Hisse Bazlı Ağırlıklı Ortalama Fiyat ve Reel Fiyat",
+      "Emir Anlitiklerine göre Hedge Wall & MaxBuy/Sell seviyeleri",
+      "Sentiment Skorlaması & Algoritmanın Kralları",
       "Özel Haftalık Bülten",
       { t: "Abonelere Özel Whatsapp Grubu", chat: true },
     ],
@@ -32,7 +35,7 @@ const BIST_PLANS = [
     id: "bist-yearly",
     market: "BIST",
     planId: "plan_JeXSEXRXPoExb",
-    url: "https://whop.com/checkout/plan_JeXSEXRXPoExb/?d2c=true",
+    url: "#https://whop.com/checkout/plan_JeXSEXRXPoExb/?d2c=true",
     name: "BIST · Yıllık",
     tagline: "Premium+ Plan · Yıllık yenilenir",
     price: "9.600",
@@ -72,19 +75,18 @@ const WS_PLANS = [
     features: [
       "Opus Wall & Cockpit — Net GEX, Vanna, rejim",
       "Greeks Heatmap — vade yapısı & duvarlar",
-      "0DTE Map — gün içi gamma & vol patlamaları",
-      "Buble Map — likidite balonları & akış yoğunluğu",
-      "Opra · Alpaca · Deribit canlı akışlar",
+      "0DTE Map — gün içi gamma & volatilite patlamaları",
+      "Buble Map — Likidite balonları & Likidite Akış Yoğunlukları",
+      "Opra · Alpaca · Deribit canlı opsiyon akışları",
       "Sıfır gecikmeli WebSocket altyapısı",
-      "nFinans topluluk erişimi",
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Grubu Destek Grubu", chat: true },
     ],
   },
   {
     id: "ws-yearly",
     market: "WALLSTREET",
     planId: "plan_QbVjw794ciU1n",
-    url: "https://whop.com/checkout/plan_QbVjw794ciU1n/?d2c=true",
+    url: "#https://whop.com/checkout/plan_QbVjw794ciU1n/?d2c=true",
     name: "WallStreet · Yıllık",
     tagline: "Tam sezon · En çok tercih edilen",
     price: "16.000",
@@ -101,8 +103,7 @@ const WS_PLANS = [
       "Buble Map — likidite balonları & akış yoğunluğu",
       "Opra · Alpaca · Deribit canlı akışlar",
       "Sıfır gecikmeli WebSocket altyapısı",
-      "nFinans topluluk erişimi",
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Destek Grubu", chat: true },
       "Öncelikli destek & erken erişim",
     ],
   },
@@ -113,7 +114,7 @@ const HYBRID_PLANS = [
     id: "hybrid-6m",
     market: "HYBRID",
     planId: "plan_rkyZmqPnxJXEy",
-    url: "https://whop.com/checkout/plan_rkyZmqPnxJXEy/?d2c=true",
+    url: "#https://whop.com/checkout/plan_rkyZmqPnxJXEy/?d2c=true",
     name: "HYBRID · 6 Aylık",
     tagline: "BIST + WallStreet · Tek paket",
     price: "14.500",
@@ -124,13 +125,13 @@ const HYBRID_PLANS = [
     badge: "%18 Tasarruf",
     cta: "HYBRID 6 Aylık Satın Al",
     features: [
-      "BIST Terminal — TF AL/SAT, Hedge Wall, Sentiment",
+      "BIST Terminal — TF AL/SAT, Hedge Wall, MaxBuy/Sell seviyeleri",
       "WallStreet Terminal — Opus Wall, Net GEX, Vanna",
       "5-15-60-120 dk. tam BIST veri seti",
       "0DTE Map · Greeks Heatmap · Buble Map",
       "Opra · Alpaca · Deribit · MS SQL canlı akışlar",
       "Özel Haftalık BIST + WS Bülteni",
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Destek Grubu", chat: true },
       { t: "Opsiyon 101 Eğitim Paketi (Ücretsiz)", sparkle: true },
     ],
   },
@@ -138,7 +139,7 @@ const HYBRID_PLANS = [
     id: "hybrid-yearly",
     market: "HYBRID",
     planId: "plan_bQSeOmkWDoRl3",
-    url: "https://whop.com/checkout/plan_bQSeOmkWDoRl3/?d2c=true",
+    url: "#https://whop.com/checkout/plan_bQSeOmkWDoRl3/?d2c=true",
     name: "HYBRID · Yıllık",
     tagline: "BIST + WallStreet · En avantajlı",
     price: "20.500",
@@ -149,14 +150,14 @@ const HYBRID_PLANS = [
     badge: "%30+ Tasarruf",
     cta: "HYBRID Yıllık Satın Al",
     features: [
-      "BIST Terminal — TF AL/SAT, Hedge Wall, Sentiment",
+      "BIST Terminal — Sentiment,Momentum,Market Skorlamaları, Hedge Wall, MaxBuy/Sell seviyeleri",
       "WallStreet Terminal — Opus Wall, Net GEX, Vanna",
       "5-15-60-120 dk. tam BIST veri seti",
       "0DTE Map · Greeks Heatmap · Buble Map",
       "Opra · Alpaca · Deribit · MS SQL canlı akışlar",
-      "Özel Haftalık BIST + WS Bülteni",
+      "Özel Haftalık BIST + WallStreet Bülteni",
       { t: "1 Yıllık TradingView PremiumAlgo Paketi", trend: true },
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Destek Grubu", chat: true },
       { t: "Opsiyon 101 Eğitim Paketi (Ücretsiz)", sparkle: true },
       "Öncelikli destek & erken erişim",
     ],
@@ -264,11 +265,12 @@ export default function Pricing() {
               + Ücretsiz Bonus
             </div>
           </div>
+          
         </div>
 
         <p className="mt-10 text-center text-xs font-mono text-zinc-600 max-w-2xl mx-auto">
-          * Üyelikler Whop tarafından yönetilir. Tüm planlar PrivyAlgo kullanıcı sözleşmesine
-          tabidir. ** TradingView PremiumAlgo Paketi BIST ve HYBRID yıllık aboneliklere özel hediyedir.
+          * Üyelikler PrivyAlgo adına nFinans tarafından yönetilir. Tüm planlar PrivyAlgo kullanıcı sözleşmesine
+          tabidir. ** TradingView PremiumAlgo Paketi BIST ve HYBRID yıllık aboneliklere özel hediyedir. Güvenli Ödeme Güvencesi ile
         </p>
       </div>
 
