@@ -27,7 +27,7 @@ api_router = APIRouter(prefix="/api")
 
 # Define Models
 class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore") # Ignore MongoDB's _id field
+    model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
@@ -36,7 +36,7 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# --- DİNAMİK ÖDEME MODELİ (Modalden gelen veriler) ---
+# --- GÜNCELLENMİŞ ÖDEME MODELİ (İlçe ve Adres Dahil) ---
 class PaymentRequest(BaseModel):
     planId: str
     planName: str
@@ -46,6 +46,9 @@ class PaymentRequest(BaseModel):
     email: str
     gsmNumber: str
     identityNumber: str
+    address: str
+    district: str
+    city: str
     username: str
     password: str
     userIp: str = "85.34.78.112"
@@ -57,7 +60,6 @@ iyzico_options = {
     'base_url': os.environ.get('IYZICO_BASE_URL')
 }
 
-# Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -67,7 +69,6 @@ async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()
     status_obj = StatusCheck(**status_dict)
     
-    # Convert to dict and serialize datetime to ISO string for MongoDB
     doc = status_obj.model_dump()
     doc['timestamp'] = doc['timestamp'].isoformat()
     
@@ -76,20 +77,18 @@ async def create_status_check(input: StatusCheckCreate):
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
     status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
     for check in status_checks:
         if isinstance(check['timestamp'], str):
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-            
     return status_checks
 
-# --- DİNAMİK ÖDEME ROTASI ---
+# --- GÜNCELLENMİŞ ÖDEME ROTASI ---
 @api_router.post("/payment/initialize")
 async def initialize_payment(request: PaymentRequest):
     try:
+        full_address = f"{request.address}, {request.district} / {request.city}"
+        
         request_data = {
             'locale': 'tr',
             'conversationId': f"ORDER-{uuid.uuid4().hex[:8]}",
@@ -107,22 +106,22 @@ async def initialize_payment(request: PaymentRequest):
                 'gsmNumber': request.gsmNumber,
                 'email': request.email,
                 'identityNumber': request.identityNumber,
-                'registrationAddress': 'Türkiye',
+                'registrationAddress': full_address,
                 'ip': request.userIp,
-                'city': 'İstanbul',
+                'city': request.city,
                 'country': 'Turkey'
             },
             'shippingAddress': {
                 'contactName': f"{request.name} {request.surname}",
-                'city': 'İstanbul',
+                'city': request.city,
                 'country': 'Turkey',
-                'address': 'Türkiye'
+                'address': full_address
             },
             'billingAddress': {
                 'contactName': f"{request.name} {request.surname}",
-                'city': 'İstanbul',
+                'city': request.city,
                 'country': 'Turkey',
-                'address': 'Türkiye'
+                'address': full_address
             },
             'basketItems': [
                 {
@@ -153,7 +152,6 @@ async def initialize_payment(request: PaymentRequest):
         print(f"Sunucu Hatası: {e}")
         raise HTTPException(status_code=500, detail="Sunucu tarafında bir hata oluştu")
 
-# Include the router in the main app
 app.include_router(api_router)
 
 app.add_middleware(
@@ -164,7 +162,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
