@@ -66,14 +66,14 @@ export default function Hero() {
           className="fade-up delay-2 mt-7 max-w-3xl mx-auto text-center text-zinc-400 text-base md:text-lg leading-relaxed"
         >
           <span className="text-teal-300">Privyalgo, BIST hisseleri için</span> için{" "}
-          <span className="text-white">&ldquo;şimdi al / şimdi sat&rdquo;</span>{" "}
-          akıllı, yüksek frekanslı ve kuantatif sinyaller;Hedge Walls ve gelişmiş sentiment analizleri sağlar. <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
+          <span className="text-white">&ldquo;Emir Akış Verilerinin Analizlerini sizin için anlık olarak yapar&rdquo;</span>{" "}
+          emir akış verilerine dayalı, yüksek frekanslı ve anlık sentiment (duygu) analizlerini yapar ve sizin için emir analitiklerine dayalı gelişmiş sentiment analizleri sağlar.Anlık olarak sizin için Emir akışlarına ve Ağırlıklandırılmış Ortalama Fiyatlara göre Hedge Duvarlar ve Gerçek Direnç Destek Bölgelerini (RES 1-2-3/SUP1-2-3) grafikler üzerinde çizerek görselleştirir. Anlık verileri okumanızı kolaylaştırır... <span className="text-amber-300">Wall Street</span> tarafında ise{" "}
           <span className="text-purple-300">
             kurumsal fonlar ve büyük yatırımcıların net pozisyonlanmalarını
           </span>{" "}
-          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı kurumsal emir akışları, sıfır gecikmeli WebSocket altyapısı ve kantitatif opsiyon modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir analitikleri GEX, VEX, DEX ve 0DTE dinamiklerini saniye saniye okuyun. Borsayı{" "}
+          gösteren gelişmiş canlı haritalar sunar.  Piyasa Mekaniklerini Yeniden Tanımlayın. Gerçek zamanlı emir akışlarını, sıfır gecikmeli WebSocket altyapısı ve kantitatif opsiyon modelleri ile Wall Street'in  & Bist' in kara kutusunu aydınlatın. Emir analitikleri GEX, VEX, DEX ve 0DTE verilerinin dinamiklerini saniye saniye okuyun. Borsaları{" "}
           <span className="text-white">yorum, dedikodu veya tahminle değil</span>; saniye saniye
-          akan gerçek verilerle okumak için tek ekran.
+          akan gerçek verilerle okumak ve analiz etmek için tek veri ekranı.
         </p>
 
         {/* CTAs */}
