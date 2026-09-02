@@ -51,7 +51,7 @@ export default function Hero() {
         >
           İki piyasa.
           <br />
-          <span className="text-amber-400 text-glow-amber">İki Ayrı terminal.</span>
+          <span className="text-amber-400 text-glow-amber">İki Ayrı Veri Analiz Terminali</span>
           <br />
           <span className="font-mono text-3xl md:text-4xl lg:text-5xl text-zinc-400 tracking-tight">
             <span className="text-teal-400">Borsa İstanbul</span>
