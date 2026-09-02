@@ -36,10 +36,10 @@ const features = [
   {
     id: "signals",
     market: "BIST",
-    title: "TF AL / TF SAT Sinyalleri",
+    title: "Özelleştirilmiş Veri Analitikleri ve Veri Yorumlama Araçları",
     subtitle: "Momentum · MarketScore · AOF",
     description:
-      "Momentum, Market Score, AOF ve Reel Fiyat kombinasyonuyla üretilen algoritmik sinyaller grafik üzerinde işaretlenir. Push bildirimleriyle anlık.",
+      "Momentum, Market Score, AOF ve Reel Fiyat kombinasyonuyla üretilen algoritmik veriler ve sinyaller grafik üzerinde işaretlenir. Push bildirimleriyle anlık.",
     icon: Crosshair,
     color: "teal-bright",
   },
@@ -60,7 +60,7 @@ const features = [
     title: "Opus Wall & Cockpit",
     subtitle: "Piyasa rejimi · Net GEX · Vanna",
     description:
-      "Gerçek zamanlı piyasa rejimi, Net GEX ve Vanna (VEX) dinamikleri. Piyasanın yönünü belirleyen algoritmik seviyeleri tek ekranda okuyun.",
+      "Gerçek zamanlı piyasa rejimi, Net GEX ve Vanna (VEX) dinamikleri. Piyasanın yönünü belirleyen algoritmik verileri ve seviyeleri tek ekranda okuyun.",
     icon: Brain,
     color: "amber",
   },
