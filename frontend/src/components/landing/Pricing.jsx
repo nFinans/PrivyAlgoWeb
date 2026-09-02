@@ -29,7 +29,7 @@ const BIST_PLANS = [
       "Emir Anlitiklerine göre Hedge Wall & MaxBuy/Sell seviyeleri",
       "Sentiment Skorlaması & Algoritmanın Kralları",
       "Özel Haftalık Bülten",
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp DestekGrubu", chat: true },
     ],
   },
   {
@@ -57,7 +57,7 @@ const BIST_PLANS = [
       "Sentiment Skorlaması & Algoritmanın Kralları",
       "Özel Haftalık Bülten",
       { t: "1 Yıllık TradingView PremiumAlgo Paketi", trend: true },
-      { t: "Abonelere Özel Whatsapp Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Destek Grubu", chat: true },
     ],
   },
 ];
@@ -83,7 +83,7 @@ const WS_PLANS = [
       "Buble Map — Likidite balonları & Likidite Akış Yoğunlukları",
       "Opra · Alpaca · Deribit canlı opsiyon akışları",
       "Sıfır gecikmeli WebSocket altyapısı",
-      { t: "Abonelere Özel Whatsapp Grubu Destek Grubu", chat: true },
+      { t: "Abonelere Özel Whatsapp Destek Grubu", chat: true },
     ],
   },
   {
