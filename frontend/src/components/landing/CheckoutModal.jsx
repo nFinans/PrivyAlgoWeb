@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 
+const COUNTRY_CODES = [
+  { code: "+90", label: "Türkiye (+90)" },
+  { code: "+1", label: "ABD/Kanada (+1)" },
+  { code: "+44", label: "İngiltere (+44)" },
+  { code: "+49", label: "Almanya (+49)" },
+  { code: "+33", label: "Fransa (+33)" },
+  { code: "+31", label: "Hollanda (+31)" },
+];
+
 export default function CheckoutModal({ plan, onClose }) {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
+    countryCode: "+90",
     gsmNumber: "",
     identityNumber: "",
+    address: "",
+    city: "",
     username: "",
     password: "",
   });
@@ -29,22 +41,32 @@ export default function CheckoutModal({ plan, onClose }) {
     setLoading(true);
     setError("");
 
+    // Telefon numarasını ülke koduyla birleştir (Örn: +905555555555)
+    const fullGsm = `${formData.countryCode}${formData.gsmNumber.replace(/^0+/, "")}`;
+
     try {
-      const response = await fetch("https://www.privyalgo.com/api/payment/initialize", {
+      const response = await fetch("/api/payment/initialize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           planId: plan.planId,
           planName: plan.name,
-          price: plan.price.replace(".", ""), // Fiyattaki olası binlik ayracını temizler
-          ...formData,
+          price: plan.price.replace(".", ""),
+          name: formData.name,
+          surname: formData.surname,
+          email: formData.email,
+          gsmNumber: fullGsm,
+          identityNumber: formData.identityNumber,
+          address: formData.address,
+          city: formData.city,
+          username: formData.username,
+          password: formData.password,
         }),
       });
 
       const data = await response.json();
 
       if (data.status === "success" && data.paymentPageUrl) {
-        // İyzico'nun güvenli ödeme sayfasına yönlendir
         window.location.href = data.paymentPageUrl;
       } else {
         setError(data.detail || "Ödeme başlatılırken bir hata oluştu.");
@@ -63,7 +85,7 @@ export default function CheckoutModal({ plan, onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl p-6 md:p-8"
+        className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl p-6 md:p-8"
         style={{
           background: "rgba(11,14,20,0.98)",
           border: `1px solid ${accent}55`,
@@ -72,7 +94,7 @@ export default function CheckoutModal({ plan, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
           <div className="flex items-center gap-3">
             <div
               className="h-9 w-9 rounded-lg flex items-center justify-center"
@@ -103,7 +125,7 @@ export default function CheckoutModal({ plan, onClose }) {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Ad</label>
@@ -144,21 +166,36 @@ export default function CheckoutModal({ plan, onClose }) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          {/* Telefon (Ülke Kodlu) & TC */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Cep Telefonu</label>
-              <input
-                type="text"
-                name="gsmNumber"
-                required
-                value={formData.gsmNumber}
-                onChange={handleChange}
-                className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
-                placeholder="+90 5XX XXX XX XX"
-              />
+              <div className="flex gap-1.5">
+                <select
+                  name="countryCode"
+                  value={formData.countryCode}
+                  onChange={handleChange}
+                  className="bg-zinc-900 border border-white/10 rounded-lg px-2 py-2 text-xs text-amber-400 focus:outline-none font-mono shrink-0"
+                >
+                  {COUNTRY_CODES.map((c) => (
+                    <option key={c.code} value={c.code} className="bg-zinc-900 text-white">
+                      {c.code}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  name="gsmNumber"
+                  required
+                  value={formData.gsmNumber}
+                  onChange={handleChange}
+                  className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                  placeholder="5XX XXX XX XX"
+                />
+              </div>
             </div>
             <div>
-              <label className="block font-mono text-[11px] text-zinc-400 mb-1">TC Kimlik No (Yasal)</label>
+              <label className="block font-mono text-[11px] text-zinc-400 mb-1">TC Kimlik No (Fatura için)</label>
               <input
                 type="text"
                 name="identityNumber"
@@ -172,6 +209,35 @@ export default function CheckoutModal({ plan, onClose }) {
             </div>
           </div>
 
+          {/* Fatura Adresi ve İl */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="col-span-2">
+              <label className="block font-mono text-[11px] text-zinc-400 mb-1">Fatura Adresi</label>
+              <input
+                type="text"
+                name="address"
+                required
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                placeholder="Mahalle, Cadde, No..."
+              />
+            </div>
+            <div>
+              <label className="block font-mono text-[11px] text-zinc-400 mb-1">İl / Şehir</label>
+              <input
+                type="text"
+                name="city"
+                required
+                value={formData.city}
+                onChange={handleChange}
+                className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                placeholder="Örn: İstanbul"
+              />
+            </div>
+          </div>
+
+          {/* Terminal Bilgileri */}
           <div className="grid grid-cols-2 gap-3 pt-2 border-t border-white/10">
             <div>
               <label className="block font-mono text-[11px] text-zinc-400 mb-1">Terminal Kullanıcı Adı</label>
@@ -202,7 +268,7 @@ export default function CheckoutModal({ plan, onClose }) {
           <button
             type="submit"
             disabled={loading}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all cursor-pointer"
+            className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all cursor-pointer"
             style={{
               background: `linear-gradient(135deg, ${accent} 0%, #d97706 100%)`,
               color: "#0b0e14",
