@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Crown, MessageCircle, TrendingUp, BookOpen, Sparkles, AlertCircle } from "lucide-react";
-// WhopModal importu geçici olarak kapatıldı
-// import WhopModal from "@/components/landing/WhopModal";
+import CheckoutModal from "@/components/landing/CheckoutModal";
 
 const BIST_PLANS = [
   {
@@ -277,8 +276,8 @@ export default function Pricing() {
         </p>
       </div>
 
-      {/* WhopModal tamamen yorum satırına alınarak iptal edildi */}
-      {/* <WhopModal plan={openPlan} onClose={() => setOpenPlan(null)} /> */}
+      {/* Şeffaf CheckoutModal Entegrasyonu */}
+      <CheckoutModal plan={openPlan} onClose={() => setOpenPlan(null)} />
     </section>
   );
 }
@@ -288,9 +287,14 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
   const [agreed, setAgreed] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  // Bu fonksiyon buton disabled olduğu için artık tetiklenmeyecek ama yapıyı korumak adına kalabilir.
   const handleClick = (e) => {
     e.preventDefault();
+    if (!agreed) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    onBuy();
   };
 
   return (
@@ -449,12 +453,11 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
         </div>
       )}
 
-      {/* CTA - PASİFE ALINMIŞ VE METNİ DEĞİŞTİRİLMİŞ BUTON */}
+      {/* CTA - AKTİF SATIN AL BUTONU */}
       <button
         onClick={handleClick}
         data-testid={`pricing-cta-${plan.id}`}
-        disabled={true}
-        className={`mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all opacity-50 cursor-not-allowed`}
+        className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all cursor-pointer hover:opacity-95 shadow-lg"
         style={{
           background: isFeatured
             ? `linear-gradient(135deg, ${accent} 0%, ${accentSecondary} 100%)`
@@ -463,7 +466,8 @@ function PlanCard({ plan, accent, accentSecondary, onBuy }) {
           border: isFeatured ? "none" : `1px solid ${accent}55`,
         }}
       >
-        ÖDEME ALTYAPISI GÜNCELLENİYOR
+        {plan.cta}
+        <ArrowRight className="w-4 h-4" />
       </button>
     </article>
   );
