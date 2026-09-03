@@ -63,7 +63,7 @@ class VerifyPaymentRequest(BaseModel):
 iyzico_options = {
     'api_key': os.environ.get('IYZICO_API_KEY', '').strip(),
     'secret_key': os.environ.get('IYZICO_SECRET_KEY', '').strip(),
-    'base_url': 'sandbox-api.iyzipay.com'
+    'base_url': 'api.iyzipay.com'
 }
 
 @api_router.get("/")
