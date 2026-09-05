@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle, Info, MessageCircle } from "lucide-react";
+import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle, Settings, MessageCircle } from "lucide-react";
 
 const COUNTRY_CODES = [
   { code: "+90", label: "Türkiye (+90)" },
@@ -29,7 +29,7 @@ export default function CheckoutModal({ plan, onClose }) {
   // Gerçek ödeme almaya başlamak için bu değeri 'true' yapman yeterli!
   const IS_PAYMENT_ACTIVE = false;
 
-  // --- FORM STATE VE FONKSİYONLARI (Aktif olana kadar arka planda hazır bekler) ---
+  // --- FORM STATE VE FONKSİYONLARI ---
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -127,52 +127,58 @@ export default function CheckoutModal({ plan, onClose }) {
         onClick={onClose}
       >
         <div
-          className="relative w-full max-w-lg overflow-y-auto rounded-2xl p-6 md:p-8 text-center"
+          className="relative w-full max-w-lg overflow-y-auto rounded-3xl p-8 md:p-10 text-center"
           style={{
             background: "rgba(11,14,20,0.98)",
-            border: `1px solid ${accent}55`,
-            boxShadow: `0 30px 100px rgba(0,0,0,0.7), 0 0 50px ${accent}22`,
+            border: `1px solid ${accent}40`,
+            boxShadow: `0 30px 100px rgba(0,0,0,0.8), 0 0 60px ${accent}20`,
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center border border-white/10 text-zinc-400 hover:text-white hover:border-white/30 transition"
+            className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-zinc-400 hover:bg-white/10 hover:text-white transition-all"
           >
             <X className="w-4 h-4" />
           </button>
 
-          <div className="flex justify-center mb-5">
-            <div
-              className="h-14 w-14 rounded-full flex items-center justify-center"
-              style={{ background: `${accent}20`, border: `1px solid ${accent}55` }}
-            >
-              <Info className="h-6 w-6" style={{ color: accent }} />
+          {/* Dönen Çark ve Parlama Efekti */}
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full blur-xl opacity-40 animate-pulse" style={{ background: accent }}></div>
+              <div
+                className="relative h-20 w-20 rounded-full flex items-center justify-center bg-zinc-950"
+                style={{ border: `2px solid ${accent}80` }}
+              >
+                <Settings className="h-9 w-9 animate-[spin_4s_linear_infinite]" style={{ color: accent }} />
+              </div>
             </div>
           </div>
 
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] mb-2" style={{ color: accent }}>
+          <div className="font-mono text-[11px] uppercase tracking-[0.3em] mb-3" style={{ color: accent }}>
             // ALTYAPI GÜNCELLEMESİ
           </div>
-          <h3 className="font-mono font-bold text-xl text-white mb-6">{plan.name}</h3>
+          <h3 className="font-mono font-black text-2xl text-white mb-6 tracking-tight">{plan.name}</h3>
 
-          <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-5 mb-6 text-sm text-zinc-300 leading-relaxed font-sans text-left">
-            <p className="mb-4">
+          <div className="bg-zinc-900/40 border border-white/5 rounded-2xl p-6 mb-8 text-[15px] text-zinc-300 leading-relaxed font-sans text-left shadow-inner">
+            <p className="mb-5">
               Panel altyapılarımız <strong>Bist için v2.0</strong>, <strong>WallStreet için v3.0</strong> altyapısına güncellenmekte ve buna yönelik eğitim içeriklerimizin hazırlanması devam etmektedir. Şimdilik bu güncellemeler ve eğitimler tamamlanana kadar yeni üyelik alamıyoruz.
             </p>
             <p>
-              Ama <span className="text-white font-medium">"Ben gereken tecrübeye ve birikime sahibim, eğitime ihtiyacım yok. v2.0 ve v3.0 paketlerini şimdiden almak istiyorum"</span> derseniz, lütfen <strong>+90 541 547 81 41</strong> WhatsApp danışma hattımızdan bizimle iletişime geçiniz.
+              Ama <span className="text-white font-medium">"Ben gereken tecrübeye ve birikime sahibim, eğitime ihtiyacım yok. v2.0 ve v3.0 paketlerini şimdiden almak istiyorum"</span> derseniz, lütfen <strong style={{ color: "#f59e0b" }}>+90 541 547 81 41</strong> WhatsApp danışma hattımızdan bizimle iletişime geçiniz.
             </p>
           </div>
 
+          {/* WallStreet Sarısı WhatsApp Butonu */}
           <a
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all cursor-pointer"
+            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-mono font-bold text-sm uppercase tracking-wider transition-all hover:-translate-y-1 hover:shadow-lg"
             style={{
-              background: `linear-gradient(135deg, ${accent} 0%, #25D366 100%)`,
+              background: "#f59e0b",
               color: "#0b0e14",
+              boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.4)",
             }}
           >
             <MessageCircle className="w-5 h-5" />
