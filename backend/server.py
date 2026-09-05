@@ -59,11 +59,11 @@ class PaymentRequest(BaseModel):
 class VerifyPaymentRequest(BaseModel):
     token: str
 
-# IYZICO Test Ayarları
+# IYZICO Ayarları (Env üzerinden dinamik)
 iyzico_options = {
     'api_key': os.environ.get('IYZICO_API_KEY', '').strip(),
     'secret_key': os.environ.get('IYZICO_SECRET_KEY', '').strip(),
-    'base_url': 'api.iyzipay.com'
+    'base_url': os.environ.get('IYZICO_BASE_URL', 'https://api.iyzipay.com').strip()
 }
 
 @api_router.get("/")
@@ -169,7 +169,7 @@ async def initialize_payment(request: PaymentRequest):
 
         token = result.get('token') if result.get('status') == 'success' else None
 
-        # Supabase'e "Ödeme Başlatıldı" olarak kaydediyoruz (Token ile eşleştireceğiz)
+        # Supabase'e "Ödeme Başlatıldı" olarak kaydediyoruz
         order_record = {
             "order_id": conversation_id,
             "name": request.name,
@@ -230,7 +230,6 @@ async def verify_payment(data: VerifyPaymentRequest):
             result = raw_result
 
         if result.get('status') == 'success' and result.get('paymentStatus') == 'SUCCESS':
-            # Token'a göre Supabase'deki kaydı "Ödeme Başarılı" olarak güncelliyoruz
             token = data.token
             update_url = f"{SUPABASE_URL}/orders?iyzico_token=eq.{token}"
             headers = {
@@ -268,7 +267,6 @@ async def get_admin_orders(credentials: HTTPBasicCredentials = Depends(security)
             response = await client.get(url, headers=headers)
             orders = response.json() if response.status_code == 200 else []
 
-        # Şık bir HTML tablo tasarımı oluşturuyoruz
         rows_html = ""
         for o in orders:
             status_color = "bg-amber-500/10 text-amber-400 border-amber-500/30" if o.get('payment_status') == "Ödeme Başlatıldı" else "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
