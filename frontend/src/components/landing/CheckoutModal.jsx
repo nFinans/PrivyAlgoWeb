@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { X, ShieldCheck, ArrowRight, Loader2, AlertCircle, Info, MessageCircle } from "lucide-react";
 
 const COUNTRY_CODES = [
   { code: "+90", label: "Türkiye (+90)" },
@@ -25,6 +25,11 @@ const COUNTRY_CODES = [
 ];
 
 export default function CheckoutModal({ plan, onClose }) {
+  // 🟢 CANLIYA GEÇİŞ ŞALTERİ 🟢
+  // Gerçek ödeme almaya başlamak için bu değeri 'true' yapman yeterli!
+  const IS_PAYMENT_ACTIVE = false;
+
+  // --- FORM STATE VE FONKSİYONLARI (Aktif olana kadar arka planda hazır bekler) ---
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -57,7 +62,6 @@ export default function CheckoutModal({ plan, onClose }) {
     setLoading(true);
     setError("");
 
-    // Şifre Güvenlik Kontrolü: En az 1 harf ve 1 rakam içermeli
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)/;
     if (!passwordRegex.test(formData.password)) {
       setError("Terminal şifresi en az bir harf ve bir rakam içermelidir.");
@@ -106,6 +110,82 @@ export default function CheckoutModal({ plan, onClose }) {
     }
   };
 
+  // ============================================================================
+  // SENARYO 1: BAKIM / WHATSAPP YÖNLENDİRMESİ (IS_PAYMENT_ACTIVE = false ise çalışır)
+  // ============================================================================
+  if (!IS_PAYMENT_ACTIVE) {
+    const whatsappNumber = "905415478141";
+    const whatsappMessage = encodeURIComponent(
+      `Merhaba, ${plan.name} paketi ile ilgileniyorum. Gerekli tecrübeye sahibim ve güncellemeleri beklemeden altyapıya dahil olmak istiyorum.`
+    );
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+    return (
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+        style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(10px)" }}
+        onClick={onClose}
+      >
+        <div
+          className="relative w-full max-w-lg overflow-y-auto rounded-2xl p-6 md:p-8 text-center"
+          style={{
+            background: "rgba(11,14,20,0.98)",
+            border: `1px solid ${accent}55`,
+            boxShadow: `0 30px 100px rgba(0,0,0,0.7), 0 0 50px ${accent}22`,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 rounded-md flex items-center justify-center border border-white/10 text-zinc-400 hover:text-white hover:border-white/30 transition"
+          >
+            <X className="w-4 h-4" />
+          </button>
+
+          <div className="flex justify-center mb-5">
+            <div
+              className="h-14 w-14 rounded-full flex items-center justify-center"
+              style={{ background: `${accent}20`, border: `1px solid ${accent}55` }}
+            >
+              <Info className="h-6 w-6" style={{ color: accent }} />
+            </div>
+          </div>
+
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] mb-2" style={{ color: accent }}>
+            // ALTYAPI GÜNCELLEMESİ
+          </div>
+          <h3 className="font-mono font-bold text-xl text-white mb-6">{plan.name}</h3>
+
+          <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-5 mb-6 text-sm text-zinc-300 leading-relaxed font-sans text-left">
+            <p className="mb-4">
+              Panel altyapılarımız <strong>Bist için v2.0</strong>, <strong>WallStreet için v3.0</strong> altyapısına güncellenmekte ve buna yönelik eğitim içeriklerimizin hazırlanması devam etmektedir. Şimdilik bu güncellemeler ve eğitimler tamamlanana kadar yeni üyelik alamıyoruz.
+            </p>
+            <p>
+              Ama <span className="text-white font-medium">"Ben gereken tecrübeye ve birikime sahibim, eğitime ihtiyacım yok. v2.0 ve v3.0 paketlerini şimdiden almak istiyorum"</span> derseniz, lütfen <strong>+90 541 547 81 41</strong> WhatsApp danışma hattımızdan bizimle iletişime geçiniz.
+            </p>
+          </div>
+
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-mono font-bold text-sm uppercase tracking-wider transition-all cursor-pointer"
+            style={{
+              background: `linear-gradient(135deg, ${accent} 0%, #25D366 100%)`,
+              color: "#0b0e14",
+            }}
+          >
+            <MessageCircle className="w-5 h-5" />
+            WhatsApp'tan Ulaşın
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // ============================================================================
+  // SENARYO 2: GERÇEK ÖDEME FORMU (IS_PAYMENT_ACTIVE = true ise çalışır)
+  // ============================================================================
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
