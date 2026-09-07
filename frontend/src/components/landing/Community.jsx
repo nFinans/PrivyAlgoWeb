@@ -39,8 +39,9 @@ export default function Community() {
                 Finansal yazılımlar ve emir akışı (order flow) analitiği geliştiren{" "}
                 <span className="text-white font-medium">nFinans</span> olarak, Veri odaklı analiz yapmak ve karar vermek isteyen yatırımcıların hem iç piyasaları hem de küresel piyasa dinamiklerini daha şeffaf ve rasyonel bir şekilde okuyabilmesini amaçlıyoruz. 
                 Bu doğrultuda, Borsa İstanbul için PrivyAlgo BIST (Hisse Senedi Piyasaları için BIST Veri Analitiklerini kullanarak) ve ABD borsaları ile ETF'ler için PrivyWallStreet (OPRA opsiyon akışlarını analiz ederek) veri analizi terminallerimizi hayata geçirdik.
-                kantitatif analizleri üzerine sürekli eğitim üretir. Türkiye&apos;nin en
-                disiplinli quant topluluklarını oluşturmak isteyen <span className="text-white font-medium">nFinans</span> ve <span className="text-white font-medium">PrivyAlgo'</span> yu takip edin...
+                Temel odak noktamız; karmaşık piyasa verilerini ve derinlik akışlarını, yatırımcıların strateji üretirken kullanabileceği sade ve analitik araçlara dönüştürmek. 
+                Biz bireysel yatırımcının menfaatlerini ön plana koyarak, abartılı veya gerçek dışı vaatlerden tamamen uzak, sadece verinin matematiğine ve gücüne inanan bir altyapıyı yatırımcıların hizmetine sunmak istiyoruz..
+                Türkiye&apos;nin en disiplinli quant topluluklarını oluşturmak isteyen <span className="text-white font-medium">nFinans</span> ve <span className="text-white font-medium">PrivyAlgo'</span> yu takip edin...
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
