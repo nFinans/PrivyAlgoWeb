@@ -31,9 +31,9 @@ export default function Community() {
                 // nFinans topluluğu
               </div>
               <h2 className="font-display font-black tracking-tighter text-4xl md:text-5xl lg:text-6xl text-white leading-[1.02]">
-                Kanıtlanmış öngörüler.
+                Veriye Dayalı Kanıtlanmış Öngörüler.
                 <br />
-                <span className="text-amber-400 text-glow-amber">Kurumsal disiplin.</span>
+                <span className="text-amber-400 text-glow-amber">Kurumsal Analiz Disiplini.</span>
               </h2>
               <p className="mt-5 text-zinc-400 text-base md:text-lg leading-relaxed max-w-xl">
                 Finansal yazılımlar ve emir akışı (order flow) analitiği geliştiren{" "}
