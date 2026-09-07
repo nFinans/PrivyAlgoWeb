@@ -28,7 +28,7 @@ export default function Community() {
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
               <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-amber-500 mb-4">
-                // nFinans & Privy Algo Hakkında
+                // nFinans & PriVYAlgo Hakkında
               </div>
               <h2 className="font-display font-black tracking-tighter text-4xl md:text-5xl lg:text-6xl text-white leading-[1.02]">
                 Veriye Dayalı Kanıtlanmış Öngörüler.
