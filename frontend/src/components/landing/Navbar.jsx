@@ -6,7 +6,7 @@ const links = [
   { label: "Modüller", href: "#features", external: false },
   { label: "Altyapı", href: "#technology", external: false },
   { label: "Paketler", href: "#pricing", external: false },
-  { label: "Topluluk", href: "#community", external: false },
+  { label: "Hakkımızda", href: "#community", external: false },
   { label: "Blog", href: "https://blog.privyalgo.com", external: true },
 ];
 
