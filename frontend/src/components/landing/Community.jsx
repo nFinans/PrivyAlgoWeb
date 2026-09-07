@@ -8,9 +8,9 @@ const socials = [
 ];
 
 const proof = [
-  { icon: TrendingUp, value: "Son 5-6 ay", label: "Yüksek doğruluklu makro öngörü serisi" },
-  { icon: Award, value: "Kanıtlanmış", label: "GEX & Vanna hedge duvarları + BIST TF AL/SAT" },
-  { icon: Users, value: "Türkiye'nin elit", label: "kantitatif finans topluluğu" },
+  { icon: TrendingUp, value: "Piyasa Trendlerini", label: "Algoritmik Verilere Dayalı Analizler Yaparak Takip Edin!" },
+  { icon: Award, value: "Veri Odaklı Analiz Platformu", label: "GEX & Vanna hedge duvarları + BIST Sentiment & Emir Analitiği Anzlizleri" },
+  { icon: Users, value: "Youtube, Twitter & Instagram", label: "Veri Odaklı Analiz Meraklıları için Yayınlar & Eğitimler" },
 ];
 
 export default function Community() {
@@ -36,10 +36,11 @@ export default function Community() {
                 <span className="text-amber-400 text-glow-amber">Kurumsal disiplin.</span>
               </h2>
               <p className="mt-5 text-zinc-400 text-base md:text-lg leading-relaxed max-w-xl">
-                Son 5-6 ayda paylaşılan yüksek doğruluklu piyasa öngörüleri ile tanınan{" "}
-                <span className="text-white font-medium">nFinans</span>, BIST + Wall Street
+                Finansal yazılımlar ve emir akışı (order flow) analitiği geliştiren{" "}
+                <span className="text-white font-medium">nFinans</span> olarak, Veri odaklı analiz yapmak ve karar vermek isteyen yatırımcıların hem iç piyasaları hem de küresel piyasa dinamiklerini daha şeffaf ve rasyonel bir şekilde okuyabilmesini amaçlıyoruz. 
+                Bu doğrultuda, Borsa İstanbul için PrivyAlgo BIST (Hisse Senedi Piyasaları için BIST Veri Analitiklerini kullanarak) ve ABD borsaları ile ETF'ler için PrivyWallStreet (OPRA opsiyon akışlarını analiz ederek) veri analizi terminallerimizi hayata geçirdik.
                 kantitatif analizleri üzerine sürekli eğitim üretir. Türkiye&apos;nin en
-                disiplinli quant topluluğuna katılın.
+                disiplinli quant topluluklarını oluşturmak isteyen <span className="text-white font-medium">nFinans</span> ve <span className="text-white font-medium">PrivyAlgo'</span> yu takip edin...
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -90,30 +91,30 @@ export default function Community() {
 
               <div className="mt-6 p-5 rounded-xl border-l-2 border-amber-500/60 bg-amber-500/5 max-h-[420px] overflow-y-auto">
                 <p className="font-mono text-[13px] text-zinc-300 italic leading-relaxed">
-                  &ldquo;Piyasalarda kazanırken şans diye bir şey yoktur; sadece erişilemeyen
-                  veriler ve algoritmalar vardır. Çoğu yatırımcı, fiyatların piyasa haberleriyle
+                  &ldquo;Piyasalarda kazanırken şans diye bir şey yoktur; sadece iyi analiz edilmiş
+                  veriler ve kanıtlanmış algoritmalar vardır. Çoğu yatırımcı, fiyatların piyasa haberleriyle
                   veya tesadüfi dalgalanmalarla yön bulduğuna inanır. Yanılıyorlar.
                 </p>
                 <p className="mt-3 font-mono text-[13px] text-zinc-300 italic leading-relaxed">
                   Ekranınızın arkasında devasa, sessiz ve &lsquo;görünmez&rsquo; bir veri
                   havuzu çalışıyor: Gamma seviyeleri, Delta pozisyonları, Vanna akışları,
                   emir defterlerinin gizli dinamikleri ve daha birçok faktör piyasayı
-                  saniye saniye yönlendirir... Yani piyasalar rastgele hareket etmez; bu
-                  fark edemediğiniz devasa verilere paralel olarak, büyük likidite
-                  akışlarının kurduğu raylar üzerinde ilerler.
+                  saniye saniye yönlendiriyor... Yani piyasalar günün sonunda rastgele hareket etmiyor; bu
+                  fark edemediğiniz yada iyi analiz edemediğiniz devasa verilere paralel olarak, büyük likidite
+                  akışlarının kurduğu raylar üzerinde ilerliyorlar.
                 </p>
                 <p className="mt-3 font-mono text-[13px] text-zinc-300 italic leading-relaxed">
                   Wall Street&apos;in karmaşık ağlarından BIST&apos;in derinliklerine kadar,
                   fiyatı hareket ettiren o &lsquo;görünmez&rsquo; ve &lsquo;takibi
-                  imkânsız&rsquo; sanılan gücü ekranınıza taşıyoruz. nFinans çatısı altında
+                  imkânsız&rsquo; sanılan analiz gücünü ekranınıza taşımaya çalışıyoruz. nFinans, PriVYAlgo çatısı altında
                   karanlıkta kalan bu verileri aydınlatıyor; piyasadaki yatırımcıların
-                  %90&apos;ının mahrum olduğu bu gizli haritaları, gelişmiş{" "}
+                  %90&apos;ının mahrum kaldığı bu gizli haritaları, gelişmiş{" "}
                   <span className="text-amber-400 not-italic font-semibold">PrivyAlgo</span>{" "}
-                  algoritmaları ve terminalleriyle siz bireysel yatırımcılar için görünür
+                  analiz araçları, yazılımları ve veri analiz terminalleriyle siz bireysel yatırımcılar için görünür
                   kılıyoruz.&rdquo;
                 </p>
                 <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-amber-400">
-                  — nFinans Araştırma
+                  — nFinans Bilgi Teknojileri, Araştırma ve Danışmanlık
                 </div>
               </div>
             </div>
